@@ -8,6 +8,7 @@ var browserify = require('browserify');
 var partialify = require('partialify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
+var eslint = require('gulp-eslint');
 
 gulp.task('html', function() {
     gulp.src('src/*.html')
@@ -36,6 +37,13 @@ gulp.task('fonts', function() {
 
     gulp.src(fonts)
         .pipe(gulp.dest('dist/fonts'));
+});
+
+gulp.task('lint', function() {
+    return gulp.src(['**/*.js','!node_modules/**'])
+        .pipe(eslint())
+        .pipe(eslint.formatEach())
+        .pipe(eslint.failAfterError());
 });
 
 gulp.task('js', function() {
@@ -74,7 +82,7 @@ gulp.task('watch:js', function() {
     gulp.watch('src/js/**/*.*', ['js']);
 });
 
-gulp.task('compile', ['html', 'css', 'fonts', 'js']);
+gulp.task('compile', ['html', 'css', 'fonts', 'lint', 'js']);
 gulp.task('watch', ['compile', 'watch:html', 'watch:js']);
 gulp.task('serve', ['watch', 'start-server']);
 gulp.task('default', ['compile']);
