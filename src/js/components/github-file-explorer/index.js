@@ -14,7 +14,7 @@ module.exports = {
         repo: {
             type: String,
             required: true
-        }
+        },
     },
     computed: {
         fullRepoUrl: function() {
@@ -43,8 +43,7 @@ module.exports = {
             this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/contents' + this.path,
                 function(data) {
                     this.files = data;
-                }
-            );
+                })
         },
         changePath: function(path) {
             this.path = '/' + path;
@@ -53,17 +52,16 @@ module.exports = {
         goBack: function() {
             this.path = this.path.split('/').slice(0, -1).join('/');
             if (this.path === '') this.path = '/';
-
+        
             this.getFiles();
         }
     },
     watch: {
         repo: function(newVal, oldVal) {
-            this.path = '/';
             this.getFiles();
         }
     },
     created: function() {
         if (this.username && this.repo) this.getFiles();
-    }
+    },
 };
