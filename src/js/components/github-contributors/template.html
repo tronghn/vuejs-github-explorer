@@ -5,14 +5,13 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th class="text-right" v-if="!showTable"><button class="btn btn-default btn-xs" @click="toggleTable()">Hide</button></th>
-                    <th class="text-right" v-else><button class="btn btn-default btn-xs" @click="toggleTable()">Show</button></th>
+                    <th class="text-right">Contributions</th>
                 </tr>
             </thead>
-            <tbody v-if="!showTable">
+            <tbody>
                 <tr v-for="contributor in contributors">
                     <td>
-                        <a href="{{ contributor.html_url }}"><img src="{{ contributor.avatar_url }}" width="20"> {{ contributor.login }}</a>
+                        <a href="{{ contributor.html_url }}"><img :src="contributor.avatar_url" width="20"> {{ contributor.login }}</a>
                     </td>
                     <td class="text-right">
                         {{ contributor.contributions }} contributions

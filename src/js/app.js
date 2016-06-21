@@ -29,12 +29,25 @@ var App = Vue.extend({
             console.groupEnd("Vue Data");
         }
     },
-    components: {
-        githubFileExplorer: require('./components/github-file-explorer'),
-        githubContributors: require('./components/github-contributors')
-    }
 });
 
 var router = new VueRouter();
+
+router.map({
+    '/files': {
+        name: 'files',
+        component: require('./components/github-file-explorer')
+    },
+    '/contributors': {
+        name: 'contributors',
+        component: require('./components/github-contributors')
+    }
+});
+
+router.redirect({
+    '/': '/files',
+
+    '*': '/'
+})
 
 router.start(App, '#container');

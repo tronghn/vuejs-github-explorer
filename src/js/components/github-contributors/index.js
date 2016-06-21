@@ -4,7 +4,6 @@ module.exports = {
         return {
             contributorCount: 0,
             contributors: [],
-            showTable: true
         };
     },
     props: {
@@ -30,9 +29,6 @@ module.exports = {
                     this.contributorCount = data.length;
                 })
         },
-        toggleTable: function() {
-            this.showTable = !this.showTable;
-        }
     },
     watch: {
         repo: function(newVal, oldVal) {

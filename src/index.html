@@ -23,14 +23,14 @@
                 <input type="submit" class="btn btn-default" value="Get repository">
             </form>
             <ul class="nav nav-pills nav-justified">
-                <li class="active"><a href="#">Files</a></li>
-                <li><a href="#">Contributors</a></li>
-                <li><a href="#">Commits</a></li>
+                <li v-link-active><a v-link="{ path: '/files', activeClass: 'active' }">Files</a></li>
+                <li v-link-active><a v-link="{ path: '/contributors', activeClass: 'active' }">Contributors</a></li>
+                <li class="disabled"><a href="#">Commits</a></li>
             </ul>
             <hr>
-            <github-contributors :username="username" :repo="repo"></github-contributors>
-            <hr>
-            <github-file-explorer :username="username" :repo="repo"></github-file-explorer>
+                <div>
+                    <router-view :username="username" :repo="repo"></router-view>
+                </div>
         </div>
     </div>
 </div>
