@@ -1,13 +1,20 @@
 var Vue = require('vue');
+var VueRouter = require('vue-router');
+var VueResource = require('vue-resource');
 Vue.config.debug = true;
-Vue.use(require('vue-resource'));
+Vue.use(VueRouter);
+Vue.use(VueResource);
 
-new Vue({
-    el: '#container',
-    data: {
-        fullRepoName: '',
-        username: '',
-        repo: ''
+var App = Vue.extend({
+    el: function () {
+        return '#container'; 
+    },
+    data: function() {
+        return {
+            fullRepoName: '',
+            username: '',
+            repo: ''
+        }
     },
     methods: {
         changeRepo: function() {
@@ -23,6 +30,11 @@ new Vue({
         }
     },
     components: {
-        githubFileExplorer: require('./components/github-file-explorer')
+        githubFileExplorer: require('./components/github-file-explorer'),
+        githubContributors: require('./components/github-contributors')
     }
 });
+
+var router = new VueRouter();
+
+router.start(App, '#container');
