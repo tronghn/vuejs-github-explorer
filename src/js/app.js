@@ -31,6 +31,11 @@ var App = Vue.extend({
     },
 });
 
+Vue.transition('fade', {
+    enterClass: 'fadeIn',
+    leaveClass: 'fadeOut'
+})
+
 var router = new VueRouter();
 
 router.map({

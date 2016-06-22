@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="file in sortedFiles">
+                <tr v-for="file in sortedFiles" class="animated" transition="fade" transition-mode="out-in">
                     <td>
                         <div class="file" v-if="file.type === 'file'">
                             <i class="fa fa-file-o"></i>

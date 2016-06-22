@@ -5,3 +5,7 @@ body {
 #changeRepoForm {
     margin-bottom: 30px;
 }
+
+.animated {
+    animation-duration: .5s;
+}

@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="contributor in contributors">
+                <tr v-for="contributor in contributors" class="animated" transition="fade" transition-mode="out-in">
                     <td>
                         <a href="{{ contributor.html_url }}"><img :src="contributor.avatar_url" width="20"> {{ contributor.login }}</a>
                     </td>
