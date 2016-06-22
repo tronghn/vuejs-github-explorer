@@ -11,8 +11,8 @@
             <tbody>
                 <tr v-for="commit in commits" class="animated" transition="fade" transition-mode="out-in">
                     <td>
-                        <a href="{{ commit.committer.html_url }}"><img :src="commit.committer.avatar_url" width="20"></a>
-                        <a href="{{ commit.committer.html_url }}">{{ commit.committer.login }}</a>
+                        <a href="{{ commit.author.html_url }}"><img :src="commit.author.avatar_url" width="20"></a>
+                        <a href="{{ commit.author.html_url }}">{{ commit.author.login }}</a>
                     </td>
                     <td>
                         <a href="{{ commit.html_url }}">
@@ -25,7 +25,7 @@
                         </a>
                     </td>
                     <td>
-                        {{ commit.commit.committer.date | moment "from" }}
+                        {{ commit.commit.author.date | moment "from" }}
                     </td>
                 </tr>
             </tbody>
