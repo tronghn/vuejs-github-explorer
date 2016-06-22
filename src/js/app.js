@@ -1,9 +1,11 @@
 var Vue = require('vue');
 var VueRouter = require('vue-router');
 var VueResource = require('vue-resource');
+var VueMoment = require('vue-moment');
 Vue.config.debug = true;
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.use(VueMoment);
 
 var App = Vue.extend({
     el: function () {
@@ -46,6 +48,10 @@ router.map({
     '/contributors': {
         name: 'contributors',
         component: require('./components/github-contributors')
+    },
+    '/commits': {
+        name: 'commits',
+        component: require('./components/github-commits')
     }
 });
 
