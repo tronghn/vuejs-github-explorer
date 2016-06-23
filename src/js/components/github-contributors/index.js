@@ -31,9 +31,7 @@ module.exports = {
         },
     },
     watch: {
-        repo: function(newVal, oldVal) {
-            this.getContributors();
-        }
+        repo: 'getContributors'
     },
     created: function() {
         if (this.username && this.repo) this.getContributors();

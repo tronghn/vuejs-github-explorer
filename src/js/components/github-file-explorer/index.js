@@ -57,9 +57,7 @@ module.exports = {
         }
     },
     watch: {
-        repo: function(newVal, oldVal) {
-            this.getFiles();
-        }
+        repo: 'getFiles'
     },
     created: function() {
         if (this.username && this.repo) this.getFiles();

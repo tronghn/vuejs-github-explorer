@@ -2,16 +2,27 @@ var Vue = require('vue');
 var VueRouter = require('vue-router');
 var VueResource = require('vue-resource');
 var VueMoment = require('vue-moment');
+
+var github_commits_item = require('./components/github-commits-item');
+
 Vue.config.debug = true;
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueMoment);
 
+Vue.component('github-commits-item', github_commits_item);
+
+Vue.transition('fade', {
+    enterClass: 'fadeIn',
+    leaveClass: 'fadeOut'
+});
+
 var App = Vue.extend({
     el: function () {
-        return '#container'; 
+        return '#app'; 
     },
-    data: function() {
+    data: function () {
         return {
             fullRepoName: '',
             username: '',
@@ -33,12 +44,11 @@ var App = Vue.extend({
     },
 });
 
-Vue.transition('fade', {
-    enterClass: 'fadeIn',
-    leaveClass: 'fadeOut'
-})
-
-var router = new VueRouter();
+var router = new VueRouter({
+    linkActiveClass: 'active',
+    saveScrollPosition: true,
+    transitionOnLoad: true
+});
 
 router.map({
     '/files': {
@@ -61,4 +71,4 @@ router.redirect({
     '*': '/'
 })
 
-router.start(App, '#container');
+router.start(App, '#app');

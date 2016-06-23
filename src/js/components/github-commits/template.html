@@ -1,32 +1,28 @@
 <div class="row">
     <div class="col-md-12">
+        <div class="text-center">
+            <div class="btn-group" role="group">
+                <button v-bind:class="{ 'disabled': pageNumber == 1 }" type="button" 
+                    class="btn btn-default" v-on:click="prev()">
+                        Prev 30
+                </button>
+                <button v-bind:class="{ 'disabled': !nextPageAvailable }" type="button" 
+                    class="btn btn-default" v-on:click="next()">
+                        Next 30
+                </button>
+            </div>
+        </div>
         <table class="table">
-            <caption>Last {{ commitCount }} commits</caption>
+            <caption>Showing {{ commitCount }} commits</caption>
             <thead>
                 <tr>
                     <th>Committer</th>
                     <th>Title</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr v-for="commit in commits" class="animated" transition="fade" transition-mode="out-in">
-                    <td>
-                        <a href="{{ commit.author.html_url }}"><img :src="commit.author.avatar_url" width="20"></a>
-                        <a href="{{ commit.author.html_url }}">{{ commit.author.login }}</a>
-                    </td>
-                    <td>
-                        <a href="{{ commit.html_url }}">
-                            {{ !!~commit.commit.message.indexOf('\n') ? commit.commit.message.substring(0, commit.commit.message.indexOf('\n')) : commit.commit.message }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ commit.html_url }}">
-                            {{ commit.sha.substring(0,7) }}
-                        </a>
-                    </td>
-                    <td>
-                        {{ commit.commit.author.date | moment "from" }}
-                    </td>
+            <tbody v-for="commit in commits">
+                <tr is="github-commits-item" :commit="commit" 
+                    class="animated" transition="fade" transition-mode="out-in">
                 </tr>
             </tbody>
         </table>
