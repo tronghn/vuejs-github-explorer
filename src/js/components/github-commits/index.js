@@ -4,6 +4,8 @@ module.exports = {
         return {
             commitCount: 0,
             commits: [],
+            commitsPrev: [],
+            commitsNext: [],
             pageNumber: 1,
             nextPageAvailable: false,
         };
@@ -25,33 +27,50 @@ module.exports = {
     },
     methods: {
         getCommits: function(pageNumber) {
-            this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/commits?page=' + pageNumber,
-                function(data) {
-                    this.commits = data;
-                    this.commitCount = data.length;
-                });
+            if (!this.nextPageAvailable) {
+                this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/commits?page=' + pageNumber,
+                    function(data) {
+                        this.commits = data;
+                        this.commitCount = this.commits.length;
+                    }
+            )}
+            this.getNextCommits(pageNumber);
+        },
+        getNextCommits: function(pageNumber) {
             this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/commits?page=' + (pageNumber + 1),
                 function(data) {
-                    var tmpCommits = data;
-                    this.nextPageAvailable = (tmpCommits.length > 0);
+                    this.commitsNext = data;
+                    this.nextPageAvailable = (this.commitsNext.length > 0);
+                });
+        },
+        getPrevCommits: function(pageNumber) {
+            this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/commits?page=' + (pageNumber - 1),
+                function(data) {
+                    this.commitsPrev = data;
                 });
         },
         prev: function() {
             if (this.pageNumber != 1) {
+                this.commitsNext = this.commits
+                this.commits = this.commitsPrev;
                 this.pageNumber--;
-                this.getCommits(this.pageNumber);
+                this.getPrevCommits(this.pageNumber);
+                this.nextPageAvailable = true;
             }
         },
         next: function() {
             if (this.nextPageAvailable) {
+                this.commitsPrev = this.commits;
+                this.commits = this.commitsNext;
                 this.pageNumber++;
-                this.getCommits(this.pageNumber);
+                this.getNextCommits(this.pageNumber);
             }
         }
     },
     watch: {
         repo: function(newVal, oldVal) {
             this.pageNumber = 1;
+            this.nextPageAvailable = false;
             this.getCommits(1);
         }
     },
