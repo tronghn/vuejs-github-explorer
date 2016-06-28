@@ -2,30 +2,30 @@
   <div class="row">
   <div class="col-md-12">
     <div class="text-center">
-    <div class="btn-group" role="group">
-      <button v-bind:class="{ 'disabled': pageNumber == 1 }" type="button" 
-      class="btn btn-default" v-on:click="prev()">
-        Prev 30
-      </button>
-      <button v-bind:class="{ 'disabled': !nextPageAvailable }" type="button" 
-      class="btn btn-default" v-on:click="next()">
-        Next 30
-      </button>
-    </div>
+      <div class="btn-group" role="group">
+        <button v-bind:class="{ 'disabled': pageNumber == 1 }" type="button" 
+        class="btn btn-default" v-on:click="prev()">
+          Prev 30
+        </button>
+        <button v-bind:class="{ 'disabled': !nextPageAvailable }" type="button" 
+        class="btn btn-default" v-on:click="next()">
+          Next 30
+        </button>
+      </div>
     </div>
     <table class="table">
-    <caption>Showing {{ commitCount }} commits (page {{ pageNumber }})</caption>
-    <thead>
-      <tr>
-      <th>Committer</th>
-      <th>Title</th>
-      </tr>
-    </thead>
-    <tbody v-for="commit in commits">
-      <tr is="CommitsItem" :commit="commit" 
-      class="animated" transition="fade" transition-mode="out-in">
-      </tr>
-    </tbody>
+      <caption>Showing {{ commitCount }} commits (page {{ pageNumber }})</caption>
+      <thead>
+        <tr>
+          <th>Committer</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody v-for="commit in commits">
+        <tr is="CommitsItem" :commit="commit" 
+        class="animated" transition="fade" transition-mode="out-in">
+        </tr>
+      </tbody>
     </table>
   </div>
   </div>
@@ -33,6 +33,7 @@
 
 <script>
 import CommitsItem from './CommitsItem.vue'
+import Store from '../store'
 
 export default {
   components: {
@@ -66,7 +67,7 @@ export default {
   methods: {
     getCommits (pageNumber) {
       if (!this.nextPageAvailable) {
-        this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/commits?page=' + pageNumber)
+        Store.getCommits(this.fullRepoUrl, pageNumber)
         .then((response) => {
           this.commits = response.json()
           this.commitCount = this.commits.length
@@ -75,14 +76,14 @@ export default {
       this.getNextCommits(pageNumber)
     },
     getNextCommits (pageNumber) {
-      this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/commits?page=' + (pageNumber + 1))
+      Store.getCommits(this.fullRepoUrl, (pageNumber + 1))
       .then((response) => {
         this.commitsNext = response.json()
         this.nextPageAvailable = (this.commitsNext.length > 0)
       })
     },
     getPrevCommits (pageNumber) {
-      this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/commits?page=' + (pageNumber - 1))
+      Store.getCommits(this.fullRepoUrl, (pageNumber - 1))
       .then((response) => {
         this.commitsPrev = response.json()
       })
@@ -91,8 +92,8 @@ export default {
       if (this.pageNumber !== 1) {
         this.commitsNext = this.commits
         this.commits = this.commitsPrev
+        this.getPrevCommits(this.pageNumber - 1)
         this.pageNumber--
-        this.getPrevCommits(this.pageNumber)
         this.nextPageAvailable = true
       }
     },
@@ -100,8 +101,8 @@ export default {
       if (this.nextPageAvailable) {
         this.commitsPrev = this.commits
         this.commits = this.commitsNext
+        this.getNextCommits(this.pageNumber + 1)
         this.pageNumber++
-        this.getNextCommits(this.pageNumber)
       }
     }
   },

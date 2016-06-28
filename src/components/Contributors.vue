@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import Store from '../store'
+
 export default {
   data () {
     return {
@@ -50,7 +52,7 @@ export default {
   },
   methods: {
     getContributors () {
-      this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/contributors')
+      Store.getContributors(this.fullRepoUrl)
       .then((response) => {
         this.contributors = response.json()
         this.contributorCount = this.contributors.length

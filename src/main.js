@@ -18,7 +18,7 @@ Vue.transition('fade', {
   leaveClass: 'fadeOut'
 })
 
-var router = new VueRouter({
+const router = new VueRouter({
   linkActiveClass: 'active',
   saveScrollPosition: true,
   transitionOnLoad: true

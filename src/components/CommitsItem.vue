@@ -1,24 +1,24 @@
 <template>
 <tr>
   <td>
-  <a v-if="authorUrl" href="{{ authorUrl }}"><img :src="authorAvatar" width="20"></a>
-  <img v-else :src="authorAvatar" width="20">
+    <a v-if="authorUrl" href="{{ authorUrl }}"><img :src="authorAvatar" width="20"></a>
+    <img v-else :src="authorAvatar" width="20">
 
-  <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
-  <p v-else>{{ authorUsername }}</p>
+    <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
+    <p v-else>{{ authorUsername }}</p>
   </td>
   <td>
-  <a href="{{ commitUrl }}">
-    {{ commitMessage }}
-  </a>
+    <a href="{{ commitUrl }}">
+      {{ commitMessage }}
+    </a>
   </td>
   <td>
-  <a href="{{ commitUrl }}">
-    {{ commitShaShort }}
-  </a>
+    <a href="{{ commitUrl }}">
+      {{ commitShaShort }}
+    </a>
   </td>
   <td>
-  {{ commitDate | moment "from" }}
+    {{ commitDate | moment "from" }}
   </td>
 </tr>
 </template>
@@ -55,7 +55,7 @@ export default {
       return this.commit.html_url
     },
     commitMessage () {
-      return (this.commit.commit.message.indexOf('\n') > -1
+      return (this.commit.commit.message.includes('\n')
         ? this.commit.commit.message.substring(0, this.commit.commit.message.indexOf('\n'))
         : this.commit.commit.message)
     },

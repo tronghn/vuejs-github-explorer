@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     changeRepo () {
-      var splitData = this.fullRepoName.split('/')
+      let splitData = this.fullRepoName.split('/')
       this.username = splitData[0]
       this.repo = splitData[1]
 

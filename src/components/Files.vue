@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import Store from '../store'
+
 export default {
   data () {
     return {
@@ -75,7 +77,7 @@ export default {
   },
   methods: {
     getFiles () {
-      this.$http.get('https://api.github.com/repos/' + this.fullRepoUrl + '/contents' + this.path)
+      Store.getFiles(this.fullRepoUrl, this.path)
         .then((response) => {
           this.files = response.json()
         })
