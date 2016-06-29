@@ -35,22 +35,13 @@
 
 <script>
 import Store from '../store'
+import MyMixin from '../mixins'
 
 export default {
+  mixins: [MyMixin],
   data () {
     return {
-      path: '/',
-      files: []
-    }
-  },
-  props: {
-    username: {
-      type: String,
-      required: true
-    },
-    repo: {
-      type: String,
-      required: true
+      path: '/'
     }
   },
   computed: {
@@ -58,7 +49,7 @@ export default {
       return this.username + '/' + this.repo
     },
     sortedFiles () {
-      return this.files.slice(0).sort(function (a, b) {
+      return this.data.slice(0).sort(function (a, b) {
         if (a.type !== b.type) {
           if (a.type === 'dir') {
             return -1
@@ -76,29 +67,22 @@ export default {
     }
   },
   methods: {
-    getFiles () {
+    getData () {
+      console.log(this.fullRepoUrl)
       Store.getFiles(this.fullRepoUrl, this.path)
         .then((response) => {
-          this.files = response.json()
+          this.data = response.json()
         })
     },
     changePath (path) {
       this.path = '/' + path
-      this.getFiles()
+      this.getData()
     },
     goBack () {
       this.path = this.path.split('/').slice(0, -1).join('/')
       if (this.path === '') this.path = '/'
-      this.getFiles()
+      this.getData()
     }
-  },
-  watch: {
-    repo () {
-      this.getFiles()
-    }
-  },
-  created () {
-    if (this.username && this.repo) this.getFiles()
   }
 }
 </script>

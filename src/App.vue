@@ -13,7 +13,7 @@
           <form id="changeRepoForm" @submit.prevent="changeRepo()" class="form-inline">
             <div class="form-group">
               <label for="fullRepoName">Full Repository Name</label>
-              <input type="text" name="fullRepoName" v-model="fullRepoName" class="form-control" placeholder="username/repository">
+              <input type="text" name="fullRepoName" @keyup.enter="changeRepo()" v-model="fullRepoName" class="form-control" placeholder="username/repository">
             </div>
             <input type="submit" class="btn btn-default" value="Get repository">
           </form>

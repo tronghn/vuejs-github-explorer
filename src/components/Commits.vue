@@ -34,43 +34,34 @@
 <script>
 import CommitsItem from './CommitsItem.vue'
 import Store from '../store'
+import MyMixin from '../mixins'
 
 export default {
   components: {
     CommitsItem
   },
+  mixins: [MyMixin],
   data () {
     return {
       commitCount: 0,
-      commits: [],
       commitsPrev: [],
       commitsNext: [],
       pageNumber: 1,
       nextPageAvailable: false
     }
   },
-  props: {
-    username: {
-      type: String,
-      required: true
-    },
-    repo: {
-      type: String,
-      required: true
-    }
-  },
   computed: {
-    fullRepoUrl () {
-      return this.username + '/' + this.repo
+    commits () {
+      return this.data
     }
   },
   methods: {
-    getCommits (pageNumber) {
+    getData (pageNumber) {
       if (!this.nextPageAvailable) {
         Store.getCommits(this.fullRepoUrl, pageNumber)
         .then((response) => {
-          this.commits = response.json()
-          this.commitCount = this.commits.length
+          this.data = response.json()
+          this.commitCount = this.data.length
         })
       }
       this.getNextCommits(pageNumber)
@@ -90,8 +81,8 @@ export default {
     },
     prev () {
       if (this.pageNumber !== 1) {
-        this.commitsNext = this.commits
-        this.commits = this.commitsPrev
+        this.commitsNext = this.data
+        this.data = this.commitsPrev
         this.getPrevCommits(this.pageNumber - 1)
         this.pageNumber--
         this.nextPageAvailable = true
@@ -99,8 +90,8 @@ export default {
     },
     next () {
       if (this.nextPageAvailable) {
-        this.commitsPrev = this.commits
-        this.commits = this.commitsNext
+        this.commitsPrev = this.data
+        this.data = this.commitsNext
         this.getNextCommits(this.pageNumber + 1)
         this.pageNumber++
       }
@@ -110,11 +101,11 @@ export default {
     repo () {
       this.pageNumber = 1
       this.nextPageAvailable = false
-      this.getCommits(1)
+      this.getData(1)
     }
   },
   created () {
-    if (this.username && this.repo) this.getCommits(1)
+    if (this.username && this.repo) this.getData(1)
   }
 }
 </script>
