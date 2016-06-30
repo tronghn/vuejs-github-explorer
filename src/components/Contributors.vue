@@ -27,10 +27,10 @@
 
 <script>
 import Store from '../store'
-import MyMixin from '../mixins'
+import FullRepoProps from '../mixins/FullRepoProps'
 
 export default {
-  mixins: [MyMixin],
+  mixins: [FullRepoProps],
   data () {
     return {
       contributorCount: 0

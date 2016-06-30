@@ -16,5 +16,9 @@ export default {
 
   getCommits (fullRepoUrl, pageNumber) {
     return Vue.http.get(API_ROOT + fullRepoUrl + '/commits?page=' + pageNumber)
+  },
+
+  getPulls (fullRepoUrl, pageNumber, state) {
+    return Vue.http.get(API_ROOT + fullRepoUrl + '/pulls?state=' + state + '&page=' + pageNumber)
   }
 }

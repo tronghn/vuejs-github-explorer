@@ -34,22 +34,14 @@
 <script>
 import CommitsItem from './CommitsItem.vue'
 import Store from '../store'
-import MyMixin from '../mixins'
+import FullRepoProps from '../mixins/FullRepoProps'
+import Pagination from '../mixins/Pagination'
 
 export default {
   components: {
     CommitsItem
   },
-  mixins: [MyMixin],
-  data () {
-    return {
-      commitCount: 0,
-      commitsPrev: [],
-      commitsNext: [],
-      pageNumber: 1,
-      nextPageAvailable: false
-    }
-  },
+  mixins: [FullRepoProps, Pagination],
   computed: {
     commits () {
       return this.data
@@ -61,51 +53,24 @@ export default {
         Store.getCommits(this.fullRepoUrl, pageNumber)
         .then((response) => {
           this.data = response.json()
-          this.commitCount = this.data.length
+          this.dataCount = this.data.length
         })
       }
-      this.getNextCommits(pageNumber)
+      this.getNextData(pageNumber)
     },
-    getNextCommits (pageNumber) {
+    getNextData (pageNumber) {
       Store.getCommits(this.fullRepoUrl, (pageNumber + 1))
       .then((response) => {
-        this.commitsNext = response.json()
-        this.nextPageAvailable = (this.commitsNext.length > 0)
+        this.dataNext = response.json()
+        this.nextPageAvailable = (this.dataNext.length > 0)
       })
     },
-    getPrevCommits (pageNumber) {
+    getPrevData (pageNumber) {
       Store.getCommits(this.fullRepoUrl, (pageNumber - 1))
       .then((response) => {
-        this.commitsPrev = response.json()
+        this.dataPrev = response.json()
       })
-    },
-    prev () {
-      if (this.pageNumber !== 1) {
-        this.commitsNext = this.data
-        this.data = this.commitsPrev
-        this.getPrevCommits(this.pageNumber - 1)
-        this.pageNumber--
-        this.nextPageAvailable = true
-      }
-    },
-    next () {
-      if (this.nextPageAvailable) {
-        this.commitsPrev = this.data
-        this.data = this.commitsNext
-        this.getNextCommits(this.pageNumber + 1)
-        this.pageNumber++
-      }
     }
-  },
-  watch: {
-    repo () {
-      this.pageNumber = 1
-      this.nextPageAvailable = false
-      this.getData(1)
-    }
-  },
-  created () {
-    if (this.username && this.repo) this.getData(1)
   }
 }
 </script>

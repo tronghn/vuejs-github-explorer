@@ -6,6 +6,7 @@ import VueMoment from 'vue-moment'
 import CompFiles from './components/Files.vue'
 import CompContributors from './components/Contributors.vue'
 import CompCommits from './components/Commits.vue'
+import CompPulls from './components/Pulls.vue'
 
 Vue.config.debug = true
 
@@ -36,6 +37,10 @@ router.map({
   '/commits': {
     name: 'commits',
     component: CompCommits
+  },
+  '/pulls': {
+    name: 'pulls',
+    component: CompPulls
   }
 })
 

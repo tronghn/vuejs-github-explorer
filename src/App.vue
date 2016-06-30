@@ -22,6 +22,7 @@
           <li v-link-active><a v-link="{ path: '/files' }">Files</a></li>
           <li v-link-active><a v-link="{ path: '/contributors' }">Contributors</a></li>
           <li v-link-active><a v-link="{ path: '/commits' }">Commits</a></li>
+          <li v-link-active><a v-link="{ path: '/pulls' }">Pull Requests</a></li>
         </ul>
         <hr>
         <div>

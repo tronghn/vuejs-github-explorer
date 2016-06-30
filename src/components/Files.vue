@@ -35,10 +35,10 @@
 
 <script>
 import Store from '../store'
-import MyMixin from '../mixins'
+import FullRepoProps from '../mixins/FullRepoProps'
 
 export default {
-  mixins: [MyMixin],
+  mixins: [FullRepoProps],
   data () {
     return {
       path: '/'
@@ -68,7 +68,6 @@ export default {
   },
   methods: {
     getData () {
-      console.log(this.fullRepoUrl)
       Store.getFiles(this.fullRepoUrl, this.path)
         .then((response) => {
           this.data = response.json()
