@@ -4,9 +4,13 @@
       <div class="text-center">
         <div class="span6">
           <input type="radio" id="open" value="open" v-model="state">
-          <label for="open">Open</label>
+          <label class="select-radio" for="open">
+            <i class="glyphicon glyphicon-retweet"></i> Open
+          </label>
           <input type="radio" id="closed" value="closed" v-model="state">
-          <label for="closed">Closed</label>
+          <label class="select-radio" for="closed">
+            <i class="glyphicon glyphicon-ok"></i> Closed
+          </label>
         </div>
         <div class="btn-group" role="group">
           <button v-bind:class="{ 'disabled': pageNumber == 1 }" type="button" 
@@ -37,6 +41,25 @@
   </div>
 </template>
 
+<style>
+.select-radio {
+  padding: 5px;
+  color: #aaa;
+}
+
+.select-radio:hover {
+  color: #555;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked + label {
+  color: #000;
+}
+</style>
+
 <script>
 import PullsItem from './PullsItem.vue'
 import Store from '../store'
@@ -66,6 +89,9 @@ export default {
           this.data = response.json()
           this.dataCount = this.data.length
         })
+        .catch((error) => {
+          this.$dispatch('input-error', error)
+        })
       }
       this.getNextData(pageNumber)
     },
@@ -75,11 +101,17 @@ export default {
         this.dataNext = response.json()
         this.nextPageAvailable = (this.dataNext.length > 0)
       })
+      .catch((error) => {
+        this.$dispatch('input-error', error)
+      })
     },
     getPrevData (pageNumber) {
       Store.getPulls(this.fullRepoUrl, (pageNumber - 1), this.state)
       .then((response) => {
         this.dataPrev = response.json()
+      })
+      .catch((error) => {
+        this.$dispatch('input-error', error)
       })
     }
   },

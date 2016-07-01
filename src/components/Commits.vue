@@ -55,6 +55,9 @@ export default {
           this.data = response.json()
           this.dataCount = this.data.length
         })
+        .catch((error) => {
+          this.$dispatch('input-error', error)
+        })
       }
       this.getNextData(pageNumber)
     },
@@ -64,11 +67,17 @@ export default {
         this.dataNext = response.json()
         this.nextPageAvailable = (this.dataNext.length > 0)
       })
+      .catch((error) => {
+        this.$dispatch('input-error', error)
+      })
     },
     getPrevData (pageNumber) {
       Store.getCommits(this.fullRepoUrl, (pageNumber - 1))
       .then((response) => {
         this.dataPrev = response.json()
+      })
+      .catch((error) => {
+        this.$dispatch('input-error', error)
       })
     }
   }

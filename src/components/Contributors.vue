@@ -48,6 +48,9 @@ export default {
         this.data = response.json()
         this.contributorCount = this.data.length
       })
+      .catch((error) => {
+        this.$dispatch('input-error', error)
+      })
     }
   }
 }

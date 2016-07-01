@@ -72,6 +72,9 @@ export default {
         .then((response) => {
           this.data = response.json()
         })
+        .catch((error) => {
+          this.$dispatch('input-error', error)
+        })
     },
     changePath (path) {
       this.path = '/' + path

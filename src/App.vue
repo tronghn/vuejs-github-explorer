@@ -12,11 +12,16 @@
         <div class="text-center">
           <form id="changeRepoForm" @submit.prevent="changeRepo()" class="form-inline">
             <div class="form-group">
-              <label for="fullRepoName">Full Repository Name</label>
-              <input type="text" name="fullRepoName" @keyup.enter="changeRepo()" v-model="fullRepoName" class="form-control" placeholder="username/repository">
+              <input type="text" name="fullRepoName" @keyup.enter="changeRepo()" 
+              v-model="fullRepoName" class="form-control" placeholder="username/repository">
+              <button type="submit" class="btn btn-default">
+                <i class="glyphicon glyphicon-refresh"></i> Get Repository
+              </button>
             </div>
-            <input type="submit" class="btn btn-default" value="Get repository">
           </form>
+        </div>
+        <div class="alert alert-danger" role="alert" v-if="errorState">
+          <strong>Oh no!</strong> An error occured: {{ errorMsg }}
         </div>
         <ul class="nav nav-pills nav-justified">
           <li v-link-active><a v-link="{ path: '/files' }">Files</a></li>
@@ -26,7 +31,8 @@
         </ul>
         <hr>
         <div>
-          <router-view :username="username" :repo="repo" class="animated" transition="fade" transition-mode="out-in"></router-view>
+          <router-view :username="username" :repo="repo" 
+          class="animated" transition="fade" transition-mode="out-in"></router-view>
         </div>
       </div>
     </div>
@@ -39,20 +45,33 @@ export default {
     return {
       fullRepoName: '',
       username: '',
-      repo: ''
+      repo: '',
+      errorState: false,
+      errorMsg: ''
     }
   },
   methods: {
     changeRepo () {
+      this.errorState = false
       let splitData = this.fullRepoName.split('/')
       this.username = splitData[0]
       this.repo = splitData[1]
-
+      if (this.repo === undefined) this.$emit('input-error', 'Invalid input')
       console.group('Vue Data')
       console.log('fullRepoName:', this.fullRepoName)
       console.log('username:', this.username)
       console.log('repo:', this.repo)
       console.groupEnd('Vue Data')
+    }
+  },
+  events: {
+    'input-error': function (msg) {
+      this.errorState = true
+      if (typeof msg === 'string') {
+        this.errorMsg = msg
+      } else {
+        this.errorMsg = JSON.parse(msg.body).message
+      }
     }
   }
 }
@@ -78,6 +97,10 @@ body {
 
 .animated {
   animation-duration: .5s;
+}
+
+.alert {
+  padding: 10px;
 }
 
 </style>
