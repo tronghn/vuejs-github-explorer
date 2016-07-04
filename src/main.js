@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import App from './App'
+
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import VueMoment from 'vue-moment'
-import CompFiles from './components/Files.vue'
-import CompContributors from './components/Contributors.vue'
-import CompCommits from './components/Commits.vue'
-import CompPulls from './components/Pulls.vue'
+
+import Files from './components/Files.vue'
+import Contributors from './components/Contributors.vue'
+import Commits from './components/Commits.vue'
+import Pulls from './components/Pulls.vue'
 
 Vue.config.debug = true
 
@@ -28,19 +30,19 @@ const router = new VueRouter({
 router.map({
   '/files': {
     name: 'files',
-    component: CompFiles
+    component: Files
   },
   '/contributors': {
     name: 'contributors',
-    component: CompContributors
+    component: Contributors
   },
   '/commits': {
     name: 'commits',
-    component: CompCommits
+    component: Commits
   },
   '/pulls': {
     name: 'pulls',
-    component: CompPulls
+    component: Pulls
   }
 })
 

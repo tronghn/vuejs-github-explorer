@@ -40,9 +40,8 @@ export default {
     authorAvatar () {
       if (this.pull.user != null) {
         return this.pull.user.avatar_url
-      } else {
-        return 'https://avatars.githubusercontent.com/u/0?v=3'
       }
+      return 'https://avatars.githubusercontent.com/u/0?v=3'
     },
     authorUsername () {
       return this.pull.user.login

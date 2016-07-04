@@ -40,16 +40,14 @@ export default {
     authorAvatar () {
       if (this.commit.author != null) {
         return this.commit.author.avatar_url
-      } else {
-        return 'https://avatars.githubusercontent.com/u/0?v=3'
       }
+      return 'https://avatars.githubusercontent.com/u/0?v=3'
     },
     authorUsername () {
       if (this.commit.author != null) {
         return this.commit.author.login
-      } else {
-        return this.commit.commit.author.name
       }
+      return this.commit.commit.author.name
     },
     commitUrl () {
       return this.commit.html_url

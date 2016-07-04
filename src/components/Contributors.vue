@@ -26,30 +26,27 @@
 </template>
 
 <script>
-import Store from '../store'
+import Api from '../api'
 import FullRepoProps from '../mixins/FullRepoProps'
 
 export default {
   mixins: [FullRepoProps],
-  data () {
-    return {
-      contributorCount: 0
-    }
-  },
   computed: {
     contributors () {
       return this.data
+    },
+    contributorCount () {
+      return this.data.length
     }
   },
   methods: {
     getData () {
-      Store.getContributors(this.fullRepoUrl)
+      Api.getContributors(this.fullRepoUrl)
       .then((response) => {
         this.data = response.json()
-        this.contributorCount = this.data.length
       })
       .catch((error) => {
-        this.$dispatch('input-error', error)
+        this.$dispatch('error', error)
       })
     }
   }

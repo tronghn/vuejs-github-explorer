@@ -6,7 +6,11 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th class="text-right"><button class="btn btn-default btn-xs" @click="goBack()" v-if="path !== '/'">Go Back</button></th>
+          <th class="text-right">
+            <button class="btn btn-default btn-xs" @click="goBack()" v-if="path !== '/'">
+              Go Back
+            </button>
+          </th>
         </tr>
       </thead>
         <tbody>
@@ -34,7 +38,7 @@
 </template>
 
 <script>
-import Store from '../store'
+import Api from '../api'
 import FullRepoProps from '../mixins/FullRepoProps'
 
 export default {
@@ -45,9 +49,6 @@ export default {
     }
   },
   computed: {
-    fullRepoUrl () {
-      return this.username + '/' + this.repo
-    },
     sortedFiles () {
       return this.data.slice(0).sort(function (a, b) {
         if (a.type !== b.type) {
@@ -68,12 +69,12 @@ export default {
   },
   methods: {
     getData () {
-      Store.getFiles(this.fullRepoUrl, this.path)
+      Api.getFiles(this.fullRepoUrl, this.path)
         .then((response) => {
           this.data = response.json()
         })
         .catch((error) => {
-          this.$dispatch('input-error', error)
+          this.$dispatch('error', error)
         })
     },
     changePath (path) {

@@ -56,7 +56,7 @@ export default {
       let splitData = this.fullRepoName.split('/')
       this.username = splitData[0]
       this.repo = splitData[1]
-      if (this.repo === undefined) this.$emit('input-error', 'Invalid input')
+      if (this.repo === undefined) this.$emit('error', 'Invalid input')
       console.group('Vue Data')
       console.log('fullRepoName:', this.fullRepoName)
       console.log('username:', this.username)
@@ -65,7 +65,7 @@ export default {
     }
   },
   events: {
-    'input-error': function (msg) {
+    'error': function (msg) {
       this.errorState = true
       if (typeof msg === 'string') {
         this.errorMsg = msg
