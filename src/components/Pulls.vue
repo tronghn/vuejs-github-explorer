@@ -6,11 +6,11 @@
         <div class="span6">
           <input type="radio" id="open" value="open" v-model="state">
           <label class="select-radio" for="open">
-            <i class="glyphicon glyphicon-retweet"></i> Open
+            <span class="glyphicon glyphicon-retweet"></span> Open
           </label>
           <input type="radio" id="closed" value="closed" v-model="state">
           <label class="select-radio" for="closed">
-            <i class="glyphicon glyphicon-ok"></i> Closed
+            <span class="glyphicon glyphicon-ok"></span> Closed
           </label>
         </div>
         <!-- TODO: Should split pagination into own component -->

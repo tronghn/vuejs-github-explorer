@@ -17,17 +17,17 @@
           <tr v-for="file in sortedFiles" class="animated" transition="fade" transition-mode="out-in">
             <td>
               <div class="file" v-if="file.type === 'file'">
-                <i class="fa fa-file-o"></i>
+                <span class="fa fa-file-o"></span>
                 {{ file.name }}
               </div>
               <div class="directory" v-if="file.type === 'dir'">
-                <i class="fa fa-folder-o"></i>
+                <span class="fa fa-folder-o"></span>
                 <a @click="changePath(file.path)">{{ file.name }}</a>
               </div>
             </td>
             <td class="text-right">
               <a href="{{ file.download_url }}" download v-if="file.type === 'file'">
-                <i class="fa fa-cloud-download"></i>
+                <span class="fa fa-cloud-download"></span>
               </a>
             </td>
           </tr>
