@@ -1,0 +1,31 @@
+<template>
+  <div class="btn-group" role="group">
+    <button v-bind:class="{ 'disabled': !prevPageAvailable || pageNumber === 1 }" 
+    type="button" class="btn btn-default" @click="this.$parent.prev()">
+      Prev 30
+    </button>
+    <button v-bind:class="{ 'disabled': !nextPageAvailable }" type="button" 
+    class="btn btn-default" @click="this.$parent.next()">
+      Next 30
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    prevPageAvailable: {
+      type: Boolean,
+      required: true
+    },
+    nextPageAvailable: {
+      type: Boolean,
+      required: true
+    },
+    pageNumber: {
+      type: Number,
+      required: true
+    }
+  }
+}
+</script>

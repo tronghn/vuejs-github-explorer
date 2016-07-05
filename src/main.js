@@ -7,8 +7,8 @@ import VueMoment from 'vue-moment'
 
 import Files from './components/Files.vue'
 import Contributors from './components/Contributors.vue'
-import Commits from './components/Commits.vue'
-import Pulls from './components/Pulls.vue'
+import Commits from './components/Commits/Commits.vue'
+import Pulls from './components/Pulls/Pulls.vue'
 
 Vue.config.debug = true
 
@@ -21,9 +21,13 @@ Vue.transition('fade', {
   leaveClass: 'fadeOut'
 })
 
+Vue.transition('slide', {
+  enterClass: 'slideInDown',
+  leaveClass: 'slideOutUp'
+})
+
 const router = new VueRouter({
   linkActiveClass: 'active',
-  saveScrollPosition: true,
   transitionOnLoad: true
 })
 

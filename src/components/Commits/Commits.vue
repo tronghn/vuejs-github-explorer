@@ -2,17 +2,10 @@
   <div class="row">
   <div class="col-md-12">
     <div class="text-center">
-      <!-- TODO: Should split pagination (incl. CSS) into own component -->
-      <div class="btn-group" role="group">
-        <button v-bind:class="{ 'disabled': !prevPageAvailable || pageNumber === 1 }" 
-        type="button" class="btn btn-default" @click="prev()">
-          Prev 30
-        </button>
-        <button v-bind:class="{ 'disabled': !nextPageAvailable }" type="button" 
-        class="btn btn-default" @click="next()">
-          Next 30
-        </button>
-      </div>
+      <page-nav-btns 
+        :next-page-available="nextPageAvailable" 
+        :prev-page-available="prevPageAvailable"
+        :page-number="pageNumber"></page-nav-btns>
     </div>
     <table class="table">
       <caption>Showing {{ dataCount }} commits (page {{ pageNumber }})</caption>
@@ -34,13 +27,15 @@
 
 <script>
 import CommitsItem from './CommitsItem.vue'
-import Api from '../api'
-import FullRepoProps from '../mixins/FullRepoProps'
-import Pagination from '../mixins/Pagination'
+import Api from '../../api'
+import FullRepoProps from '../../mixins/FullRepoProps'
+import Pagination from '../../mixins/Pagination'
+import PageNavBtns from '../PageNavBtns.vue'
 
 export default {
   components: {
-    CommitsItem
+    CommitsItem,
+    PageNavBtns
   },
   mixins: [FullRepoProps, Pagination],
   computed: {

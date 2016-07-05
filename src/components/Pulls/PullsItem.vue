@@ -1,26 +1,26 @@
 <template>
-<tr>
-  <td>
-    <a v-if="authorUrl" href="{{ authorUrl }}"><img :src="authorAvatar" width="20"></a>
-    <img v-else :src="authorAvatar" width="20">
+  <tr>
+    <td>
+      <a v-if="authorUrl" href="{{ authorUrl }}"><img :src="authorAvatar" width="20"></a>
+      <img v-else :src="authorAvatar" width="20">
 
-    <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
-    <p v-else>{{ authorUsername }}</p>
-  </td>
-  <td>
-    <a href="{{ pullUrl }}">
-      {{ pullMessage }}
-    </a>
-  </td>
-  <td>
-    <a href="{{ pullUrl }}">
-      #{{ pullNumber }} ({{ pullState }})
-    </a>
-  </td>
-  <td>
-    {{ pullDate | moment "from" }}
-  </td>
-</tr>
+      <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
+      <p v-else>{{ authorUsername }}</p>
+    </td>
+    <td>
+      <a href="{{ pullUrl }}">
+        {{ pullMessage }}
+      </a>
+    </td>
+    <td>
+      <a href="{{ pullUrl }}">
+        #{{ pullNumber }} ({{ pullState }})
+      </a>
+    </td>
+    <td>
+      {{ pullDate | moment "from" }}
+    </td>
+  </tr>
 </template>
 
 <script>

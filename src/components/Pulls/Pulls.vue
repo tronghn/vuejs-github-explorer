@@ -2,28 +2,11 @@
   <div class="row">
     <div class="col-md-12">
       <div class="text-center">
-        <!-- TODO: Should split state switching into own component -->
-        <div class="span6">
-          <input type="radio" id="open" value="open" v-model="state">
-          <label class="select-radio" for="open">
-            <span class="glyphicon glyphicon-retweet"></span> Open
-          </label>
-          <input type="radio" id="closed" value="closed" v-model="state">
-          <label class="select-radio" for="closed">
-            <span class="glyphicon glyphicon-ok"></span> Closed
-          </label>
-        </div>
-        <!-- TODO: Should split pagination into own component -->
-        <div class="btn-group" role="group">
-          <button v-bind:class="{ 'disabled': !prevPageAvailable || pageNumber === 1 }" 
-          type="button" class="btn btn-default" @click="prev()">
-            Prev 30
-          </button>
-          <button v-bind:class="{ 'disabled': !nextPageAvailable }" type="button" 
-          class="btn btn-default" @click="next()">
-            Next 30
-          </button>
-        </div>
+        <state-switch :state.sync="state"></state-switch>
+        <page-nav-btns 
+        :next-page-available="nextPageAvailable" 
+        :prev-page-available="prevPageAvailable"
+        :page-number="pageNumber"></page-nav-btns>
       </div>
       <table class="table">
         <caption>Showing {{ dataCount }} Pull Requests (page {{ pageNumber }})</caption>
@@ -43,34 +26,19 @@
   </div>
 </template>
 
-<style>
-.select-radio {
-  padding: 5px;
-  color: #aaa;
-}
-
-.select-radio:hover {
-  color: #555;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-input[type="radio"]:checked + label {
-  color: #000;
-}
-</style>
-
 <script>
 import PullsItem from './PullsItem.vue'
-import Api from '../api'
-import FullRepoProps from '../mixins/FullRepoProps'
-import Pagination from '../mixins/Pagination'
+import Api from '../../api'
+import FullRepoProps from '../../mixins/FullRepoProps'
+import Pagination from '../../mixins/Pagination'
+import PageNavBtns from '../PageNavBtns.vue'
+import StateSwitch from '../StateSwitch.vue'
 
 export default {
   components: {
-    PullsItem
+    PullsItem,
+    PageNavBtns,
+    StateSwitch
   },
   mixins: [FullRepoProps, Pagination],
   data () {

@@ -1,12 +1,10 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="text-center">
-          <h1>Vue.js GitHub Explorer</h1>
-        </div>
-      </div>
+    <div class="alert alert-danger animated" role="alert" v-if="errorState" 
+      transition="slide" transition-mode="out-in">
+      <p><strong>Oh no!</strong> An error occured: {{ errorMsg }}</p>
     </div>
+    <header-bar></header-bar>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="text-center">
@@ -14,14 +12,11 @@
             <div class="form-group">
               <input type="text" name="fullRepoName" @keyup.enter="changeRepo()" 
               v-model="fullRepoName" class="form-control" placeholder="username/repository">
-              <button type="submit" class="btn btn-default">
-                <i class="glyphicon glyphicon-refresh"></i> Get Repository
+              <button type="submit" class="btn btn-primary btn-repo">
+                <i class="fa fa-search"></i>
               </button>
             </div>
           </form>
-        </div>
-        <div class="alert alert-danger" role="alert" v-if="errorState">
-          <strong>Oh no!</strong> An error occured: {{ errorMsg }}
         </div>
         <ul class="nav nav-pills nav-justified">
           <li v-link-active><a v-link="{ path: '/files' }">Files</a></li>
@@ -40,7 +35,12 @@
 </template>
 
 <script>
+import HeaderBar from './components/HeaderBar.vue'
+
 export default {
+  components: {
+    HeaderBar
+  },
   data () {
     return {
       fullRepoName: '',
@@ -72,24 +72,31 @@ export default {
       } else {
         this.errorMsg = JSON.parse(msg.body).message
       }
+      setTimeout(() => {
+        this.errorState = false
+      }, 4000)
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/bootstrap/dist/css/bootstrap-theme.min.css';
+/* @import '../node_modules/bootstrap/dist/css/bootstrap-theme.min.css'; */
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '/static/animate.min.css';
+@import url(http://fonts.googleapis.com/css?family=Roboto:100);
+
+$c1: #042f40;
 
 html {
   height: 100%;
 }
 
 body {
-  padding-top: 30px;
+  font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
+
 
 #changeRepoForm {
   margin-bottom: 30px;
@@ -101,6 +108,44 @@ body {
 
 .alert {
   padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+}
+
+.form-control {
+  border-radius: 6px 0px 0px 6px;
+}
+
+.btn-repo[type="submit"] {
+    margin-left: -4px;
+}
+
+.btn-repo {
+  border-radius: 0px 6px 6px 0px;
+  border-color: $c1;
+  background-color: $c1;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+  background-color: lighten($c1, 10%);
+  border-color: $c1;
+ }
+
+.form-control:focus {
+  border-color: $c1;
+  box-shadow: 0 0 5px rgba(4, 47, 64, 0.5);
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  background-color: $c1;
+}
+
+.nav-pills a {
+  color: $c1;
 }
 
 </style>

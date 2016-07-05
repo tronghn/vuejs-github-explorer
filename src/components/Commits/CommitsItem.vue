@@ -1,26 +1,26 @@
 <template>
-<tr>
-  <td>
-    <a v-if="authorUrl" href="{{ authorUrl }}"><img :src="authorAvatar" width="20"></a>
-    <img v-else :src="authorAvatar" width="20">
+  <tr>
+    <td>
+      <a v-if="authorUrl" href="{{ authorUrl }}"><img :src="authorAvatar" width="20"></a>
+      <img v-else :src="authorAvatar" width="20">
 
-    <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
-    <p v-else>{{ authorUsername }}</p>
-  </td>
-  <td>
-    <a href="{{ commitUrl }}">
-      {{ commitMessage }}
-    </a>
-  </td>
-  <td>
-    <a href="{{ commitUrl }}">
-      {{ commitShaShort }}
-    </a>
-  </td>
-  <td>
-    {{ commitDate | moment "from" }}
-  </td>
-</tr>
+      <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
+      <p v-else>{{ authorUsername }}</p>
+    </td>
+    <td>
+      <a href="{{ commitUrl }}">
+        {{ commitMessage }}
+      </a>
+    </td>
+    <td>
+      <a href="{{ commitUrl }}">
+        {{ commitShaShort }}
+      </a>
+    </td>
+    <td>
+      {{ commitDate | moment "from" }}
+    </td>
+  </tr>
 </template>
 
 <script>
