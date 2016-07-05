@@ -1,6 +1,5 @@
 <template>
-  <div class="row">
-  <div class="col-md-12">
+  <div>
     <div class="text-center">
       <page-nav-btns 
         :next-page-available="nextPageAvailable" 
@@ -21,7 +20,6 @@
         </tr>
       </tbody>
     </table>
-  </div>
   </div>
 </template>
 

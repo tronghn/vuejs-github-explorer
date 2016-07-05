@@ -7,28 +7,12 @@
     <header-bar></header-bar>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <div class="text-center">
-          <form id="changeRepoForm" @submit.prevent="changeRepo()" class="form-inline">
-            <div class="form-group">
-              <input type="text" name="fullRepoName" @keyup.enter="changeRepo()" 
-              v-model="fullRepoName" class="form-control" placeholder="username/repository">
-              <button type="submit" class="btn btn-primary btn-repo">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-          </form>
-        </div>
-        <ul class="nav nav-pills nav-justified">
-          <li v-link-active><a v-link="{ path: '/files' }">Files</a></li>
-          <li v-link-active><a v-link="{ path: '/contributors' }">Contributors</a></li>
-          <li v-link-active><a v-link="{ path: '/commits' }">Commits</a></li>
-          <li v-link-active><a v-link="{ path: '/pulls' }">Pull Requests</a></li>
-        </ul>
+        <!-- TODO: Implement Vuex store for the Repo Form -->
+        <repo-form :full-repo-name.sync="fullRepoName"></repo-form>
+        <menu></menu>
         <hr>
-        <div>
-          <router-view :username="username" :repo="repo" 
+        <router-view :username="username" :repo="repo" 
           class="animated" transition="fade" transition-mode="out-in"></router-view>
-        </div>
       </div>
     </div>
   </div>
@@ -36,10 +20,14 @@
 
 <script>
 import HeaderBar from './components/HeaderBar.vue'
+import Menu from './components/Menu.vue'
+import RepoForm from './components/RepoForm.vue'
 
 export default {
   components: {
-    HeaderBar
+    HeaderBar,
+    Menu,
+    RepoForm
   },
   data () {
     return {
@@ -97,11 +85,6 @@ body {
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 
-
-#changeRepoForm {
-  margin-bottom: 30px;
-}
-
 .animated {
   animation-duration: .5s;
 }
@@ -115,37 +98,4 @@ body {
   z-index: 1;
   text-align: center;
 }
-
-.form-control {
-  border-radius: 6px 0px 0px 6px;
-}
-
-.btn-repo[type="submit"] {
-    margin-left: -4px;
-}
-
-.btn-repo {
-  border-radius: 0px 6px 6px 0px;
-  border-color: $c1;
-  background-color: $c1;
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-  background-color: lighten($c1, 10%);
-  border-color: $c1;
- }
-
-.form-control:focus {
-  border-color: $c1;
-  box-shadow: 0 0 5px rgba(4, 47, 64, 0.5);
-}
-
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
-  background-color: $c1;
-}
-
-.nav-pills a {
-  color: $c1;
-}
-
 </style>

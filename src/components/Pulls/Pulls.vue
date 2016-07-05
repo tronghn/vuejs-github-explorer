@@ -1,28 +1,26 @@
 <template>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="text-center">
-        <state-switch :state.sync="state"></state-switch>
-        <page-nav-btns 
-        :next-page-available="nextPageAvailable" 
-        :prev-page-available="prevPageAvailable"
-        :page-number="pageNumber"></page-nav-btns>
-      </div>
-      <table class="table">
-        <caption>Showing {{ dataCount }} Pull Requests (page {{ pageNumber }})</caption>
-        <thead>
-          <tr>
-            <th>By</th>
-            <th>Title</th>
-          </tr>
-        </thead>
-        <tbody v-for="pull in pulls">
-          <tr is="PullsItem" :pull="pull" 
-          class="animated" transition="fade" transition-mode="out-in">
-          </tr>
-        </tbody>
-      </table>
+  <div>
+    <div class="text-center">
+      <state-switch :state.sync="state"></state-switch>
+      <page-nav-btns 
+      :next-page-available="nextPageAvailable" 
+      :prev-page-available="prevPageAvailable"
+      :page-number="pageNumber"></page-nav-btns>
     </div>
+    <table class="table">
+      <caption>Showing {{ dataCount }} Pull Requests (page {{ pageNumber }})</caption>
+      <thead>
+        <tr>
+          <th>By</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody v-for="pull in pulls">
+        <tr is="PullsItem" :pull="pull" 
+        class="animated" transition="fade" transition-mode="out-in">
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
