@@ -81,6 +81,7 @@ $c1: #042f40;
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
   background-color: $c1;
+  border-radius: 0;
 }
 
 .nav-pills a {
@@ -89,6 +90,7 @@ $c1: #042f40;
 
 .nav-pills a:hover {
   color: #000;
+  border-radius: 0;
 }
 
 .nav-vertical {

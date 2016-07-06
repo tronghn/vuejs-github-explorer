@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="alert alert-danger animated" role="alert" v-if="errorState" 
+    <div class="alert alert-danger animated" role="alert" v-show="errorState" 
       transition="slide" transition-mode="out-in">
       <p><strong>Oh no!</strong> An error occured: {{ errorMsg }}</p>
     </div>

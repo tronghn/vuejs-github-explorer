@@ -35,7 +35,7 @@ $c1: #042f40;
 }
 
 .btn-repo[type="submit"] {
-    margin-left: -4px;
+  margin-left: -4px;
 }
 
 .btn-repo {
@@ -49,8 +49,8 @@ $c1: #042f40;
   border-color: $c1;
  }
 
-.form-control:focus {
-  border-color: $c1;
-  box-shadow: 0 0 5px rgba(4, 47, 64, 0.5);
+.form-control:focus, .form-control:active {
+  border-color: #aaa;
+  box-shadow: 0 0 2px $c1;
 }
 </style>

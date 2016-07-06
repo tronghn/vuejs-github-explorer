@@ -1,7 +1,9 @@
 <template>
   <div class="text-center">
     <div class="name">
-      Vue.js <span class="middle">GitHub</span> Explorer</h1>
+      <span class="inner">
+        Vue.js <span class="middle">GitHub</span> Explorer</h1>
+      </span>
     </div>
   </div>
 </template>
@@ -11,25 +13,27 @@ $c1: #042f40;
 $c2: #ffffff;
 
 .name {
-  font-family: Roboto;
-  font-size: 38px;
+  font: 100 6vh/1 Roboto;
   color: $c2;
+}
+
+.inner {
   background: $c1;
   text-transform: uppercase;
-  text-align: center;
-  margin: 40px auto;
-  padding: 0 15px 5px 15px;
+  margin: 4rem auto;
+  padding: 0 2rem 1rem;
   display: inline-block;
+  box-shadow: 0 2px 5px $c1;
 }
 
 .middle {
   color: $c1;
-  font-size: 52px;
+  font-size: 10vh;
   font-weight: 600;
   text-transform: initial;
   background: darken($c2, 10%);
-  padding: 20px;
-  margin: 0 5px;
+  padding: 1rem;
+  margin: 0 1rem;
 }
 
 </style>
