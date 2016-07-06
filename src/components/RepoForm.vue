@@ -5,7 +5,7 @@
         <input type="text" name="fullRepoName" @keyup.enter="this.$parent.changeRepo()" 
         v-model="fullRepoName" class="form-control" placeholder="username/repository">
         <button type="submit" class="btn btn-primary btn-repo">
-          <i class="fa fa-search"></i>
+          <span class="fa fa-search"></span>
         </button>
       </div>
     </form>

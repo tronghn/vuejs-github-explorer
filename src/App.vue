@@ -4,12 +4,12 @@
       transition="slide" transition-mode="out-in">
       <p><strong>Oh no!</strong> An error occured: {{ errorMsg }}</p>
     </div>
+    <menu></menu>
     <header-bar></header-bar>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <!-- TODO: Implement Vuex store for the Repo Form -->
         <repo-form :full-repo-name.sync="fullRepoName"></repo-form>
-        <menu></menu>
         <hr>
         <router-view :username="username" :repo="repo" 
           class="animated" transition="fade" transition-mode="out-in"></router-view>
@@ -83,6 +83,7 @@ html {
 
 body {
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+  overflow-x: hidden;
 }
 
 .animated {
@@ -97,5 +98,6 @@ body {
   right: 0;
   z-index: 1;
   text-align: center;
+  border-radius: 0;
 }
 </style>
