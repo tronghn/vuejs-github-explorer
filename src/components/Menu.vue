@@ -1,7 +1,7 @@
 <template>
   <div class="nav-vertical">
     <button type="button" class="toggle-nav btn btn-primary" 
-      v-bind:class="{ 'toggle-nav-collapsed' : toggle }" @click="toggleNav">
+      v-bind:class="{ 'toggle-nav-collapsed' : toggle }" @click="toggle = !toggle">
       <span v-bind:class="{'fa fa-chevron-right': toggle, 'fa fa-chevron-left': !toggle}"></span>
     </button>
     <ul class="nav nav-pills nav-stacked" v-bind:class="{'nav-pills-collapsed': toggle}">
@@ -38,11 +38,6 @@ export default {
   data () {
     return {
       toggle: false
-    }
-  },
-  methods: {
-    toggleNav () {
-      this.toggle = !this.toggle
     }
   }
 }

@@ -1,11 +1,13 @@
 <template>
   <div>
     <div class="text-center">
-      <state-switch :state.sync="state"></state-switch>
+      <state-switch :state.sync="state"></state-switch> <!-- TODO: sync will be removed in Vue 2.0 -->
       <page-nav-btns 
       :next-page-available="nextPageAvailable" 
       :prev-page-available="prevPageAvailable"
-      :page-number="pageNumber"></page-nav-btns>
+      :page-number="pageNumber"
+      :prev-child="prev"
+      :next-child="next"></page-nav-btns>
     </div>
     <table class="table">
       <caption>Showing {{ dataCount }} Pull Requests (page {{ pageNumber }})</caption>

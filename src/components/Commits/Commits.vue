@@ -4,7 +4,9 @@
       <page-nav-btns 
         :next-page-available="nextPageAvailable" 
         :prev-page-available="prevPageAvailable"
-        :page-number="pageNumber"></page-nav-btns>
+        :page-number="pageNumber"
+        :prev-child="prev"
+        :next-child="next"></page-nav-btns>
     </div>
     <table class="table">
       <caption>Showing {{ dataCount }} commits (page {{ pageNumber }})</caption>
