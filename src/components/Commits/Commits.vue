@@ -28,7 +28,8 @@
 <script>
 import CommitsItem from './CommitsItem.vue'
 import Api from '../../api'
-import FullRepoProps from '../../mixins/FullRepoProps'
+import { setError } from '../../vuex/actions'
+import RepoProps from '../../mixins/RepoProps'
 import Pagination from '../../mixins/Pagination'
 import PageNavBtns from '../PageNavBtns.vue'
 
@@ -37,7 +38,7 @@ export default {
     CommitsItem,
     PageNavBtns
   },
-  mixins: [FullRepoProps, Pagination],
+  mixins: [RepoProps, Pagination],
   computed: {
     commits () {
       return this.data
@@ -46,35 +47,40 @@ export default {
   methods: {
     getData (pageNumber) {
       if (!this.nextPageAvailable) {
-        Api.getCommits(this.fullRepoUrl, pageNumber)
+        Api.getCommits(this.username, this.repo, pageNumber)
         .then((response) => {
           this.data = response.json()
         })
         .catch((error) => {
-          this.$dispatch('error', error)
+          this.setError(error)
         })
       }
       this.getNextData(pageNumber)
     },
     getNextData (pageNumber) {
-      Api.getCommits(this.fullRepoUrl, (pageNumber + 1))
+      Api.getCommits(this.username, this.repo, (pageNumber + 1))
       .then((response) => {
         this.dataNext = response.json()
         this.nextPageAvailable = (this.dataNext.length > 0)
       })
       .catch((error) => {
-        this.$dispatch('error', error)
+        this.setError(error)
       })
     },
     getPrevData (pageNumber) {
-      Api.getCommits(this.fullRepoUrl, (pageNumber - 1))
+      Api.getCommits(this.username, this.repo, (pageNumber - 1))
       .then((response) => {
         this.dataPrev = response.json()
         this.prevPageAvailable = (this.dataPrev.length > 0)
       })
       .catch((error) => {
-        this.$dispatch('error', error)
+        this.setError(error)
       })
+    }
+  },
+  vuex: {
+    actions: {
+      setError
     }
   }
 }

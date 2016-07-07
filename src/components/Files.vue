@@ -35,10 +35,11 @@
 
 <script>
 import Api from '../api'
-import FullRepoProps from '../mixins/FullRepoProps'
+import RepoProps from '../mixins/RepoProps'
+import { setError } from '../vuex/actions'
 
 export default {
-  mixins: [FullRepoProps],
+  mixins: [RepoProps],
   data () {
     return {
       path: '/'
@@ -65,12 +66,12 @@ export default {
   },
   methods: {
     getData () {
-      Api.getFiles(this.fullRepoUrl, this.path)
+      Api.getFiles(this.username, this.repo, this.path)
         .then((response) => {
           this.data = response.json()
         })
         .catch((error) => {
-          this.$dispatch('error', error)
+          this.setError(error)
         })
     },
     changePath (path) {
@@ -81,6 +82,11 @@ export default {
       this.path = this.path.split('/').slice(0, -1).join('/')
       if (this.path === '') this.path = '/'
       this.getData()
+    }
+  },
+  vuex: {
+    actions: {
+      setError
     }
   }
 }

@@ -23,10 +23,11 @@
 
 <script>
 import Api from '../api'
-import FullRepoProps from '../mixins/FullRepoProps'
+import RepoProps from '../mixins/RepoProps'
+import { setError } from '../vuex/actions'
 
 export default {
-  mixins: [FullRepoProps],
+  mixins: [RepoProps],
   computed: {
     contributors () {
       return this.data
@@ -37,13 +38,18 @@ export default {
   },
   methods: {
     getData () {
-      Api.getContributors(this.fullRepoUrl)
+      Api.getContributors(this.username, this.repo)
       .then((response) => {
         this.data = response.json()
       })
       .catch((error) => {
-        this.$dispatch('error', error)
+        this.setError(error)
       })
+    }
+  },
+  vuex: {
+    actions: {
+      setError
     }
   }
 }

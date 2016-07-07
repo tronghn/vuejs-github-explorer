@@ -29,7 +29,8 @@
 <script>
 import PullsItem from './PullsItem.vue'
 import Api from '../../api'
-import FullRepoProps from '../../mixins/FullRepoProps'
+import { setError } from '../../vuex/actions'
+import RepoProps from '../../mixins/RepoProps'
 import Pagination from '../../mixins/Pagination'
 import PageNavBtns from '../PageNavBtns.vue'
 import StateSwitch from '../StateSwitch.vue'
@@ -40,7 +41,7 @@ export default {
     PageNavBtns,
     StateSwitch
   },
-  mixins: [FullRepoProps, Pagination],
+  mixins: [RepoProps, Pagination],
   data () {
     return {
       state: 'open'
@@ -54,40 +55,45 @@ export default {
   methods: {
     getData (pageNumber) {
       if (!this.nextPageAvailable) {
-        Api.getPulls(this.fullRepoUrl, pageNumber, this.state)
+        Api.getPulls(this.username, this.repo, pageNumber, this.state)
         .then((response) => {
           this.data = response.json()
         })
         .catch((error) => {
-          this.$dispatch('error', error)
+          this.setError(error)
         })
       }
       this.getNextData(pageNumber)
     },
     getNextData (pageNumber) {
-      Api.getPulls(this.fullRepoUrl, (pageNumber + 1), this.state)
+      Api.getPulls(this.username, this.repo, (pageNumber + 1), this.state)
       .then((response) => {
         this.dataNext = response.json()
         this.nextPageAvailable = (this.dataNext.length > 0)
       })
       .catch((error) => {
-        this.$dispatch('error', error)
+        this.setError(error)
       })
     },
     getPrevData (pageNumber) {
-      Api.getPulls(this.fullRepoUrl, (pageNumber - 1), this.state)
+      Api.getPulls(this.username, this.repo, (pageNumber - 1), this.state)
       .then((response) => {
         this.dataPrev = response.json()
         this.prevPageAvailable = (this.dataPrev.length > 0)
       })
       .catch((error) => {
-        this.$dispatch('error', error)
+        this.setError(error)
       })
     }
   },
   watch: {
     state () {
       this.reload()
+    }
+  },
+  vuex: {
+    actions: {
+      setError
     }
   }
 }

@@ -6,19 +6,19 @@ Vue.use(VueResource)
 const API_ROOT = 'https://api.github.com/repos/'
 
 export default {
-  getFiles (fullRepoUrl, path) {
-    return Vue.http.get(API_ROOT + fullRepoUrl + '/contents' + path)
+  getFiles (username, repo, path) {
+    return Vue.http.get(API_ROOT + username + '/' + repo + '/contents' + path)
   },
 
-  getContributors (fullRepoUrl) {
-    return Vue.http.get(API_ROOT + fullRepoUrl + '/contributors')
+  getContributors (username, repo) {
+    return Vue.http.get(API_ROOT + username + '/' + repo + '/contributors')
   },
 
-  getCommits (fullRepoUrl, pageNumber) {
-    return Vue.http.get(API_ROOT + fullRepoUrl + '/commits?page=' + pageNumber)
+  getCommits (username, repo, pageNumber) {
+    return Vue.http.get(API_ROOT + username + '/' + repo + '/commits?page=' + pageNumber)
   },
 
-  getPulls (fullRepoUrl, pageNumber, state) {
-    return Vue.http.get(API_ROOT + fullRepoUrl + '/pulls?state=' + state + '&page=' + pageNumber)
+  getPulls (username, repo, pageNumber, state) {
+    return Vue.http.get(API_ROOT + username + '/' + repo + '/pulls?state=' + state + '&page=' + pageNumber)
   }
 }

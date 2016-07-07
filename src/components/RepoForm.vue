@@ -1,9 +1,9 @@
 <template>
   <div class="text-center">
-    <form id="changeRepoForm" @submit.prevent="this.$parent.changeRepo()" class="form-inline">
+    <form id="changeRepoForm" @submit.prevent="changeRepo(fullRepoName)" class="form-inline">
       <div class="form-group">
-        <input type="text" name="fullRepoName" @keyup.enter="this.$parent.changeRepo()" 
-        v-model="fullRepoName" class="form-control" placeholder="username/repository">
+        <input type="text" name="fullRepoName"  
+          v-model="fullRepoName" class="form-control" placeholder="username/repository">
         <button type="submit" class="btn btn-primary btn-repo">
           <span class="fa fa-search"></span>
         </button>
@@ -13,11 +13,17 @@
 </template>
 
 <script>
+import { setRepo } from '../vuex/actions'
+
 export default {
-  props: {
-    fullRepoName: {
-      type: String,
-      required: true
+  data () {
+    return {
+      fullRepoName: ''
+    }
+  },
+  vuex: {
+    actions: {
+      changeRepo: setRepo
     }
   }
 }

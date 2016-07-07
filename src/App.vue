@@ -8,8 +8,7 @@
     <header-bar></header-bar>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <!-- TODO: Implement Vuex store for the Repo Form -->
-        <repo-form :full-repo-name.sync="fullRepoName"></repo-form>
+        <repo-form></repo-form>
         <hr>
         <router-view :username="username" :repo="repo" 
           class="animated" transition="fade" transition-mode="out-in"></router-view>
@@ -22,6 +21,7 @@
 import HeaderBar from './components/HeaderBar.vue'
 import Menu from './components/Menu.vue'
 import RepoForm from './components/RepoForm.vue'
+import store from './vuex/store'
 
 export default {
   components: {
@@ -29,42 +29,13 @@ export default {
     Menu,
     RepoForm
   },
-  data () {
-    return {
-      fullRepoName: '',
-      username: '',
-      repo: '',
-      errorState: false,
-      errorMsg: ''
+  vuex: {
+    getters: {
+      errorMsg: state => state.errorMsg,
+      errorState: state => state.errorState
     }
   },
-  methods: {
-    changeRepo () {
-      this.errorState = false
-      let splitData = this.fullRepoName.split('/')
-      this.username = splitData[0]
-      this.repo = splitData[1]
-      if (this.repo === undefined) this.$emit('error', 'Invalid input')
-      console.group('Vue Data')
-      console.log('fullRepoName:', this.fullRepoName)
-      console.log('username:', this.username)
-      console.log('repo:', this.repo)
-      console.groupEnd('Vue Data')
-    }
-  },
-  events: {
-    'error': function (msg) {
-      this.errorState = true
-      if (typeof msg === 'string') {
-        this.errorMsg = msg
-      } else {
-        this.errorMsg = JSON.parse(msg.body).message
-      }
-      setTimeout(() => {
-        this.errorState = false
-      }, 4000)
-    }
-  }
+  store
 }
 </script>
 
@@ -96,7 +67,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 3;
   text-align: center;
   border-radius: 0;
 }
