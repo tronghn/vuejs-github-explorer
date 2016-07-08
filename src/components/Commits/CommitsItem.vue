@@ -1,26 +1,26 @@
 <template>
-  <tr>
-    <td>
-      <a v-if="authorUrl" href="{{ authorUrl }}"><img :src="authorAvatar" width="20"></a>
-      <img v-else :src="authorAvatar" width="20">
-
-      <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
-      <p v-else>{{ authorUsername }}</p>
-    </td>
-    <td>
-      <a href="{{ commitUrl }}">
-        {{ commitMessage }}
-      </a>
-    </td>
-    <td>
-      <a href="{{ commitUrl }}">
-        {{ commitShaShort }}
-      </a>
-    </td>
-    <td>
-      {{ commitDate | moment "from" }}
-    </td>
-  </tr>
+  <div class="table-row">
+    <div class="clearfix">
+      <a v-if="authorUrl" href="{{ authorUrl }}"><img class="pull-left cell-avatar" :src="authorAvatar" width="40"></a>
+      <img class="pull-left" v-else :src="authorAvatar" width="20">
+      <div class="content-heading">
+        <a href="{{ commitUrl }}">
+          <span class="cell-title">{{ commitMessage }}</span>
+        </a>
+        <div class="pull-right btn btn-default cell-sha">
+          <a href="{{ commitUrl }}">
+            {{ commitShaShort }}
+          </a>
+        </div>
+      </div>
+      <div class="cell-content">
+        <a class="cell-author" v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
+        <p v-else>{{ authorUsername }}</p>
+        <span title="{{ commitDate | moment 'D. MMM. YYYY, HH:mm ZZ'}}">commited {{ commitDate | moment "from" }}</span>
+      </div>
+    </div>
+  </div>
+  <hr>
 </template>
 
 <script>

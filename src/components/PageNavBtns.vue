@@ -37,3 +37,10 @@ export default {
   }
 }
 </script>
+
+<style>
+
+.btn-group {
+  margin-bottom: 10px;
+}
+</style>

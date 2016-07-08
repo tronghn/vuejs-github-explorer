@@ -9,20 +9,27 @@
       :prev-child="prev"
       :next-child="next"></page-nav-btns>
     </div>
-    <table class="table">
-      <caption>Showing {{ dataCount }} Pull Requests (page {{ pageNumber }})</caption>
-      <thead>
-        <tr>
-          <th>By</th>
-          <th>Title</th>
-        </tr>
-      </thead>
-      <tbody v-for="pull in pulls">
-        <tr is="PullsItem" :pull="pull" 
-        class="animated" transition="fade" transition-mode="out-in">
-        </tr>
-      </tbody>
-    </table>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Showing {{ dataCount }} Pull Requests (page {{ pageNumber }})
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          <caption></caption>
+          <thead>
+            <tr>
+              <th>By</th>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tbody v-for="pull in pulls">
+            <tr is="PullsItem" :pull="pull" 
+            class="animated" transition="fade" transition-mode="out-in">
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 

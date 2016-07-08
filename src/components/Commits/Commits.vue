@@ -8,20 +8,23 @@
         :prev-child="prev"
         :next-child="next"></page-nav-btns>
     </div>
-    <table class="table">
-      <caption>Showing {{ dataCount }} commits (page {{ pageNumber }})</caption>
-      <thead>
-        <tr>
-          <th>Committer</th>
-          <th>Title</th>
-        </tr>
-      </thead>
-      <tbody v-for="commit in commits">
-        <tr is="CommitsItem" :commit="commit" 
-        class="animated" transition="fade" transition-mode="out-in">
-        </tr>
-      </tbody>
-    </table>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Showing {{ dataCount }} commits (page {{ pageNumber }})
+      </div>
+      <div class="panel-body">
+        <commits-item v-for="commit in commits" :commit="commit" class="animated" 
+          transition="fade" transition-mode="out-in"></commits-item>
+      </div>
+    </div>
+    <div class="text-center">
+      <page-nav-btns 
+        :next-page-available="nextPageAvailable" 
+        :prev-page-available="prevPageAvailable"
+        :page-number="pageNumber"
+        :prev-child="prev"
+        :next-child="next"></page-nav-btns>
+    </div>
   </div>
 </template>
 

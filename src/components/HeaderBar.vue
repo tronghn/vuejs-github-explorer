@@ -28,7 +28,7 @@ $c2: #ffffff;
 
 .middle {
   color: $c1;
-  font-size: 10vh;
+  font-size: 9vh;
   font-weight: 600;
   text-transform: initial;
   background: darken($c2, 10%);

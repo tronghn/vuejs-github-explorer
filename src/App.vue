@@ -10,8 +10,7 @@
       <div class="col-md-8 col-md-offset-2">
         <repo-form></repo-form>
         <hr>
-        <router-view :username="username" :repo="repo" 
-          class="animated" transition="fade" transition-mode="out-in"></router-view>
+        <router-view class="animated" transition="fade" transition-mode="out-in"></router-view>
       </div>
     </div>
   </div>
@@ -41,10 +40,9 @@ export default {
 
 <style lang="scss">
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-/* @import '../node_modules/bootstrap/dist/css/bootstrap-theme.min.css'; */
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
-@import '/static/animate.min.css';
-@import url(http://fonts.googleapis.com/css?family=Roboto:100);
+@import './assets/animate.min.css';
+@import url(https://fonts.googleapis.com/css?family=Roboto:100);
 
 $c1: #042f40;
 
@@ -70,5 +68,34 @@ body {
   z-index: 3;
   text-align: center;
   border-radius: 0;
+}
+
+.panel-default > .panel-heading {
+  color: #777;
+}
+
+.cell-avatar {
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+a .cell-title {
+  color: #000;
+  font-weight: bold;
+}
+
+.cell-author {
+  color: #444;
+  font-weight: bold;
+}
+
+.cell-content {
+  font-size: 13px;
+}
+
+.cell-sha {
+  width: 80px;
+  font-weight: bold;
+  font-size: 13px;
 }
 </style>

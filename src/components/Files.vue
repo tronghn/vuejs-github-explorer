@@ -1,36 +1,40 @@
 <template>
-  <table class="table">
-    <caption>File Path: {{ path }}</caption>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th class="text-right">
-          <button class="btn btn-default btn-xs" @click="goBack()" v-if="path !== '/'">
-            Go Back
-          </button>
-        </th>
-      </tr>
-    </thead>
-      <tbody>
-        <tr v-for="file in sortedFiles" class="animated" transition="fade" transition-mode="out-in">
-          <td>
-            <div class="file" v-if="file.type === 'file'">
-              <span class="fa fa-file-o"></span>
-              {{ file.name }}
-            </div>
-            <div class="directory" v-if="file.type === 'dir'">
-              <span class="fa fa-folder-o"></span>
-              <a @click="changePath(file.path)">{{ file.name }}</a>
-            </div>
-          </td>
-          <td class="text-right">
-            <a href="{{ file.download_url }}" download v-if="file.type === 'file'">
-              <span class="fa fa-cloud-download"></span>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-  </table>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="pull-left">
+        File Path: {{ path }}
+      </div>
+      <div class="pull-right">
+        <button class="btn btn-default btn-xs" @click="goBack()" v-if="path !== '/'">
+          Go Back
+        </button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <tbody>
+          <tr v-for="file in sortedFiles" class="animated" transition="fade" transition-mode="out-in">
+            <td>
+              <div class="file" v-if="file.type === 'file'">
+                <span class="fa fa-file-o"></span>
+                {{ file.name }}
+              </div>
+              <div class="directory" v-if="file.type === 'dir'">
+                <span class="fa fa-folder-o"></span>
+                <a @click="changePath(file.path)">{{ file.name }}</a>
+              </div>
+            </td>
+            <td class="text-right">
+              <a href="{{ file.download_url }}" download v-if="file.type === 'file'">
+                <span class="fa fa-cloud-download"></span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script>

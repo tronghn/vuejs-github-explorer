@@ -5,28 +5,10 @@
       <span v-bind:class="{'fa fa-chevron-right': toggle, 'fa fa-chevron-left': !toggle}"></span>
     </button>
     <ul class="nav nav-pills nav-stacked" v-bind:class="{'nav-pills-collapsed': toggle}">
-      <li v-link-active>
-        <a v-link="{ path: '/files' }">
-          <span class="nav-icon fa fa-files-o"></span>
-          <p v-show="!toggle" class="nav-text animated" transition="fade" transition-mode="out-in">Files</p>
-        </a>
-      </li>
-      <li v-link-active>
-        <a v-link="{ path: '/contributors' }">
-          <span class="nav-icon fa fa-users"></span>
-          <p v-show="!toggle" class="nav-text animated" transition="fade" transition-mode="out-in">Contributors</p>
-        </a>
-      </li>
-      <li v-link-active>
-        <a v-link="{ path: '/commits' }">
-          <span class="nav-icon fa fa-code"></span>
-          <p v-show="!toggle" class="nav-text animated" transition="fade" transition-mode="out-in">Commits</p>
-        </a>
-      </li>
-      <li v-link-active>
-        <a v-link="{ path: '/pulls' }">
-          <span class="nav-icon icon-pr fa fa-code-fork"></span>
-          <p v-show="!toggle" class="nav-text animated" transition="fade" transition-mode="out-in">Pull Requests</p>
+      <li v-link-active v-for="page in pages">
+        <a v-link="{ path: page.path }">
+          <span class="nav-icon fa {{ page.icon }}"></span>
+          <p v-show="!toggle" class="nav-text animated" transition="fade" transition-mode="out-in">{{ page.text }}</p>
         </a>
       </li>
     </ul>
@@ -37,7 +19,29 @@
 export default {
   data () {
     return {
-      toggle: false
+      toggle: false,
+      pages: [
+        {
+          path: '/files',
+          icon: 'fa-files-o',
+          text: 'Files'
+        },
+        {
+          path: '/contributors',
+          icon: 'fa-users',
+          text: 'Contributors'
+        },
+        {
+          path: '/commits',
+          icon: 'fa-code',
+          text: 'Commits'
+        },
+        {
+          path: '/pulls',
+          icon: 'fa-code-fork',
+          text: 'Pull Requests'
+        }
+      ]
     }
   }
 }
@@ -46,7 +50,7 @@ export default {
 <style lang="scss">
 $c1: #042f40;
 
-.icon-pr {
+.fa-code-fork {
   margin-left: 0 !important;
 }
 

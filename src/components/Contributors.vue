@@ -1,24 +1,24 @@
 <template>
-  <table class="table">
-    <caption>Top {{ contributorCount }} contributors</caption>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th class="text-right">Contributions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="contributor in contributors" class="animated" transition="fade" transition-mode="out-in">
-        <td>
-          <a href="{{ contributor.html_url }}"><img :src="contributor.avatar_url" width="20"></a>
-          <a href="{{ contributor.html_url }}">{{ contributor.login }}</a>
-        </td>
-        <td class="text-right">
-          {{ contributor.contributions }} contributions
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Top {{ contributorCount }} contributors
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <tbody>
+          <tr v-for="contributor in contributors" class="animated" transition="fade" transition-mode="out-in">
+            <td>
+              <a href="{{ contributor.html_url }}"><img :src="contributor.avatar_url" width="20"></a>
+              <a href="{{ contributor.html_url }}">{{ contributor.login }}</a>
+            </td>
+            <td class="text-right">
+              {{ contributor.contributions }} contributions
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script>
