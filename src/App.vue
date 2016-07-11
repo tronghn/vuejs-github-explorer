@@ -73,29 +73,4 @@ body {
 .panel-default > .panel-heading {
   color: #777;
 }
-
-.cell-avatar {
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
-a .cell-title {
-  color: #000;
-  font-weight: bold;
-}
-
-.cell-author {
-  color: #444;
-  font-weight: bold;
-}
-
-.cell-content {
-  font-size: 13px;
-}
-
-.cell-sha {
-  width: 80px;
-  font-weight: bold;
-  font-size: 13px;
-}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <div class="name">
-      <span class="inner">
+      <span class="inner text-uppercase">
         Vue.js <span class="middle">GitHub</span> Explorer</h1>
       </span>
     </div>
@@ -19,7 +19,6 @@ $c2: #ffffff;
 
 .inner {
   background: $c1;
-  text-transform: uppercase;
   margin: 4rem auto;
   padding: 0 2rem 1rem;
   display: inline-block;

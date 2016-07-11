@@ -2,11 +2,15 @@
   <div class="text-center">
     <form id="changeRepoForm" @submit.prevent="changeRepo(fullRepoName)" class="form-inline">
       <div class="form-group">
-        <input type="text" name="fullRepoName"  
-          v-model="fullRepoName" class="form-control" placeholder="username/repository">
-        <button type="submit" class="btn btn-primary btn-repo">
-          <span class="fa fa-search"></span>
-        </button>
+        <div class="input-group">
+          <input type="text" name="fullRepoName"  
+            v-model="fullRepoName" class="form-control" placeholder="username/repository">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary btn-repo">
+              <span class="fa fa-search"></span>
+            </button>
+          </span>
+        </div>
       </div>
     </form>
   </div>
@@ -38,10 +42,6 @@ $c1: #042f40;
 
 .form-control {
   border-radius: 6px 0px 0px 6px;
-}
-
-.btn-repo[type="submit"] {
-  margin-left: -4px;
 }
 
 .btn-repo {
