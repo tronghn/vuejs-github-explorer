@@ -73,4 +73,25 @@ body {
 .panel-default > .panel-heading {
   color: #777;
 }
+
+.cell-avatar {
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.cell-avatar:hover {
+  box-shadow: 0 0 5px $c1;
+}
+
+.cell-title {
+  color: #000;
+}
+
+.cell-author {
+  color: #444;
+}
+
+.cell-sha {
+  width: 80px;
+}
 </style>

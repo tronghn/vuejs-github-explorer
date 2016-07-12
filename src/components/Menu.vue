@@ -6,7 +6,7 @@
     </button>
     <ul class="nav nav-pills nav-stacked" v-bind:class="{'nav-pills-collapsed': toggle}">
       <li v-link-active v-for="page in pages">
-        <a v-link="{ path: page.path }">
+        <a v-link="{ path: page.path }" title="{{ page.text }}">
           <span class="nav-icon fa {{ page.icon }}"></span>
           <p v-show="!toggle" class="nav-text animated" transition="fade" transition-mode="out-in">{{ page.text }}</p>
         </a>

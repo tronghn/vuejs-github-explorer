@@ -3,7 +3,7 @@
     <div class="table-row">
       <div class="clearfix">
         <a v-if="authorUrl" href="{{ authorUrl }}"><img class="pull-left cell-avatar" :src="authorAvatar" width="40"></a>
-        <img class="pull-left" v-else :src="authorAvatar" width="20">
+        <img class="pull-left cell-avatar" v-else :src="authorAvatar" width="20">
         <div class="content-heading">
           <a class="cell-title" href="{{ commitUrl }}">
             <strong>{{ commitMessage }}</strong>
@@ -24,25 +24,6 @@
     <hr>
   </div>
 </template>
-
-<style>
-.cell-avatar {
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
-.cell-title {
-  color: #000;
-}
-
-.cell-author {
-  color: #444;
-}
-
-.cell-sha {
-  width: 80px;
-}
-</style>
 
 <script>
 export default {
