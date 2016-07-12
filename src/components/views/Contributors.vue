@@ -4,32 +4,28 @@
       Top {{ contributorCount }} contributors
     </div>
     <div class="panel-body row">
-      <div class="col-md-4 row-mrgn-btm" v-for="(index, contributor) in contributors">
-        <div class="pull-right">#{{ index + 1 }}</div>
-        <a href="{{ contributor.html_url }}">
-          <img class="pull-left cell-avatar" :src="contributor.avatar_url" width="40">
-          <div class="content-heading cell-author">
-            <strong>{{ contributor.login }}</strong>
-          </div>
-        </a>
-        <small>
-          {{ contributor.contributions }} contributions
-        </small>
+      <div class="col-md-4" v-for="(index, contributor) in contributors">
+        <div class="cell-row">
+          <div class="pull-right">#{{ index + 1 }}</div>
+          <a href="{{ contributor.html_url }}">
+            <img class="pull-left cell-avatar" :src="contributor.avatar_url" width="40">
+            <div class="content-heading cell-author">
+              <strong>{{ contributor.login }}</strong>
+            </div>
+          </a>
+          <small>
+            {{ contributor.contributions }} contributions
+          </small>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<style>
-.row-mrgn-btm {
-  margin-bottom: 20px;
-}
-</style>
-
 <script>
-import Api from '../api'
-import RepoProps from '../mixins/RepoProps'
-import { setError } from '../vuex/actions'
+import Api from '../../api'
+import RepoProps from '../../mixins/RepoProps'
+import { setError } from '../../vuex/actions'
 
 export default {
   mixins: [RepoProps],

@@ -13,8 +13,8 @@
         Showing {{ dataCount }} commits (page {{ pageNumber }})
       </div>
       <div class="panel-body">
-        <commits-item v-for="commit in commits" :commit="commit" class="animated" 
-          transition="fade" transition-mode="out-in"></commits-item>
+        <commit v-for="commit in commits" :commit="commit" class="animated" 
+          transition="fade" transition-mode="out-in"></commit>
       </div>
     </div>
     <div class="text-center">
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import CommitsItem from './CommitsItem.vue'
+import Commit from '../Commit.vue'
 import Api from '../../api'
 import { setError } from '../../vuex/actions'
 import RepoProps from '../../mixins/RepoProps'
@@ -38,7 +38,7 @@ import PageNavBtns from '../PageNavBtns.vue'
 
 export default {
   components: {
-    CommitsItem,
+    Commit,
     PageNavBtns
   },
   mixins: [RepoProps, Pagination],

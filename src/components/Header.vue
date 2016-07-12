@@ -1,11 +1,11 @@
 <template>
-  <div class="text-center">
+  <header class="text-center">
     <div class="name">
       <span class="inner text-uppercase">
         Vue.js <span class="middle">GitHub</span> Explorer</h1>
       </span>
     </div>
-  </div>
+  </header>
 </template>
 
 <style lang="scss">

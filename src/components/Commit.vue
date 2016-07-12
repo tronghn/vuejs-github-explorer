@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="table-row">
+    <div class="table-row cell-row">
       <div class="clearfix">
         <a v-if="authorUrl" href="{{ authorUrl }}"><img class="pull-left cell-avatar" :src="authorAvatar" width="40"></a>
-        <img class="pull-left cell-avatar" v-else :src="authorAvatar" width="20">
+        <img class="pull-left cell-avatar" v-else :src="authorAvatar" width="40">
         <div class="content-heading">
           <a class="cell-title" href="{{ commitUrl }}">
             <strong>{{ commitMessage }}</strong>
@@ -15,13 +15,14 @@
           </div>
         </div>
         <small>
-          <a class="cell-author" v-if="authorUrl" href="{{ authorUrl }}"><strong>{{ authorUsername }}</strong></a>
-          <p v-else>{{ authorUsername }}</p>
-          <span title="{{ commitDate | moment 'D. MMM. YYYY, HH:mm ZZ'}}">commited {{ commitDate | moment "from" }}</span>
+          <strong class="cell-author">
+            <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
+            <span v-else>{{ authorUsername }}</span>
+          </strong>
+          <span title="{{ commitDate | moment 'D. MMM. YYYY, HH:mm ZZ'}}">committed {{ commitDate | moment "from" }}</span>
         </small>
       </div>
     </div>
-    <hr>
   </div>
 </template>
 

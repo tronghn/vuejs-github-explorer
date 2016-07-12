@@ -1,14 +1,14 @@
 import Vue from 'vue'
-import App from './App'
+import App from './components/App.vue'
 
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import VueMoment from 'vue-moment'
 
-import Files from './components/Files.vue'
-import Contributors from './components/Contributors.vue'
-import Commits from './components/Commits/Commits.vue'
-import Pulls from './components/Pulls/Pulls.vue'
+import Files from './components/views/Files.vue'
+import Contributors from './components/views/Contributors.vue'
+import Commits from './components/views/Commits.vue'
+import Pulls from './components/views/Pulls.vue'
 
 Vue.config.debug = true
 

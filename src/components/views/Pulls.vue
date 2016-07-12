@@ -23,7 +23,7 @@
             </tr>
           </thead>
           <tbody v-for="pull in pulls">
-            <tr is="PullsItem" :pull="pull" 
+            <tr is="Pull" :pull="pull" 
             class="animated" transition="fade" transition-mode="out-in">
             </tr>
           </tbody>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import PullsItem from './PullsItem.vue'
+import Pull from '../Pull.vue'
 import Api from '../../api'
 import { setError } from '../../vuex/actions'
 import RepoProps from '../../mixins/RepoProps'
@@ -44,7 +44,7 @@ import StateSwitch from '../StateSwitch.vue'
 
 export default {
   components: {
-    PullsItem,
+    Pull,
     PageNavBtns,
     StateSwitch
   },

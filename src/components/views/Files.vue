@@ -38,9 +38,9 @@
 </template>
 
 <script>
-import Api from '../api'
-import RepoProps from '../mixins/RepoProps'
-import { setError } from '../vuex/actions'
+import Api from '../../api'
+import RepoProps from '../../mixins/RepoProps'
+import { setError } from '../../vuex/actions'
 
 export default {
   mixins: [RepoProps],
