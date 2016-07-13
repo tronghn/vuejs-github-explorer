@@ -14,20 +14,16 @@
         Showing {{ dataCount }} Pull Requests (page {{ pageNumber }})
       </div>
       <div class="panel-body">
-        <table class="table">
-          <caption></caption>
-          <thead>
-            <tr>
-              <th>By</th>
-              <th>Title</th>
-            </tr>
-          </thead>
-          <tbody v-for="pull in pulls">
-            <tr is="Pull" :pull="pull" 
-            class="animated" transition="fade" transition-mode="out-in">
-            </tr>
-          </tbody>
-        </table>
+        <pull v-show="pulls.length > 0" v-for="pull in pulls" :pull="pull" 
+            class="animated" transition="fade" transition-mode="out-in"></pull>
+        <div v-show="pulls.length <= 0" class="text-center" >
+          <div v-show="state === 'open'">
+            <h3>There aren't any open pull requests</h3>
+          </div>
+          <div v-show="state === 'closed'">
+            <h3>There aren't any closed pull requests</h3>
+          </div>
+        </div>
       </div>
     </div>
   </div>
