@@ -1,10 +1,6 @@
 <template>
   <div>
-    <!-- TODO: alert component -->
-    <div class="alert alert-danger animated" role="alert" v-show="errorState" 
-      transition="slide" transition-mode="out-in">
-      <p><strong>Oh no!</strong> An error occured: {{ errorMsg }}</p>
-    </div>
+    <alert></alert>
     <menu></menu>
     <header-comp></header-comp>
     <div class="row">
@@ -20,19 +16,15 @@
 import HeaderComp from './Header.vue'
 import Menu from './Menu.vue'
 import RepoForm from './RepoForm.vue'
+import Alert from './Alert.vue'
 import store from '../vuex/store'
 
 export default {
   components: {
     HeaderComp,
     Menu,
-    RepoForm
-  },
-  vuex: {
-    getters: {
-      errorMsg: state => state.errorMsg,
-      errorState: state => state.errorState
-    }
+    RepoForm,
+    Alert
   },
   store
 }
@@ -57,17 +49,6 @@ body {
 
 .animated {
   animation-duration: .5s;
-}
-
-.alert {
-  padding: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  text-align: center;
-  border-radius: 0;
 }
 
 .panel-default > .panel-heading {
