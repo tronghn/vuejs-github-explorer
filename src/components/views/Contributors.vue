@@ -4,10 +4,10 @@
       Top {{ contributorCount }} contributors
     </div>
     <div class="panel-body row">
-      <div class="col-md-4" v-for="(index, contributor) in contributors">
+      <div class="col-md-4" v-for="(contributor, index) in contributors">
         <div class="cell-row">
           <div class="pull-right">#{{ index + 1 }}</div>
-          <a href="{{ contributor.html_url }}">
+          <a :href="contributor.html_url">
             <img class="pull-left cell-avatar" :src="contributor.avatar_url" width="40">
             <div class="content-heading cell-author">
               <strong>{{ contributor.login }}</strong>
@@ -41,7 +41,7 @@ export default {
     getData () {
       Api.getContributors(this.username, this.repo)
       .then((response) => {
-        this.data = response.json()
+        this.data = response.body
       })
       .catch((error) => {
         this.setError(error)

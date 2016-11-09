@@ -1,12 +1,17 @@
 <template>
   <div>
     <alert></alert>
-    <menu></menu>
+    <custom-menu></custom-menu>
     <header-comp></header-comp>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <repo-form></repo-form>
-        <router-view class="animated" transition="fade" transition-mode="out-in"></router-view>
+        <transition name="custom-classes-transition"
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+          mode="out-in">
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
   </div>
@@ -14,7 +19,7 @@
 
 <script>
 import HeaderComp from './Header.vue'
-import Menu from './Menu.vue'
+import CustomMenu from './Menu.vue'
 import RepoForm from './RepoForm.vue'
 import Alert from './Alert.vue'
 import store from '../vuex/store'
@@ -22,7 +27,7 @@ import store from '../vuex/store'
 export default {
   components: {
     HeaderComp,
-    Menu,
+    CustomMenu,
     RepoForm,
     Alert
   },

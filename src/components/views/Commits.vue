@@ -13,8 +13,12 @@
         Showing {{ dataCount }} commits (page {{ pageNumber }})
       </div>
       <div class="panel-body">
-        <commit v-for="commit in commits" :commit="commit" class="animated" 
-          transition="fade" transition-mode="out-in"></commit>
+        <transition-group name="custom-classes-transition"
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+          mode="out-in">
+          <commit v-for="commit in commits" :key="commit.html_url" :commit="commit"></commit>
+        </transition-group>
       </div>
     </div>
     <div class="text-center">
@@ -52,7 +56,7 @@ export default {
       if (!this.nextPageAvailable) {
         Api.getCommits(this.username, this.repo, pageNumber)
         .then((response) => {
-          this.data = response.json()
+          this.data = response.body
         })
         .catch((error) => {
           this.setError(error)
@@ -63,7 +67,7 @@ export default {
     getNextData (pageNumber) {
       Api.getCommits(this.username, this.repo, (pageNumber + 1))
       .then((response) => {
-        this.dataNext = response.json()
+        this.dataNext = response.body
         this.nextPageAvailable = (this.dataNext.length > 0)
       })
       .catch((error) => {
@@ -73,7 +77,7 @@ export default {
     getPrevData (pageNumber) {
       Api.getCommits(this.username, this.repo, (pageNumber - 1))
       .then((response) => {
-        this.dataPrev = response.json()
+        this.dataPrev = response.body
         this.prevPageAvailable = (this.dataPrev.length > 0)
       })
       .catch((error) => {

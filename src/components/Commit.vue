@@ -2,24 +2,24 @@
   <div>
     <div class="table-row cell-row">
       <div class="clearfix">
-        <a v-if="authorUrl" href="{{ authorUrl }}"><img class="pull-left cell-avatar" :src="authorAvatar" width="40"></a>
+        <a v-if="authorUrl" :href="authorUrl"><img class="pull-left cell-avatar" :src="authorAvatar" width="40"></a>
         <img class="pull-left cell-avatar" v-else :src="authorAvatar" width="40">
         <div class="content-heading">
-          <a class="cell-title" href="{{ commitUrl }}">
+          <a class="cell-title" :href="commitUrl">
             <strong>{{ commitMessage }}</strong>
           </a>
           <div class="pull-right btn btn-default cell-sha">
-            <a href="{{ commitUrl }}">
+            <a :href="commitUrl">
               <small><strong>{{ commitShaShort }}</small></strong>
             </a>
           </div>
         </div>
         <small>
           <strong class="cell-author">
-            <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
+            <a v-if="authorUrl" :href="authorUrl">{{ authorUsername }}</a>
             <span v-else>{{ authorUsername }}</span>
           </strong>
-          <span title="{{ commitDate | moment 'D. MMM. YYYY, HH:mm ZZ'}}">committed {{ commitDate | moment "from" }}</span>
+          <span>committed {{ commitDate }}</span> <!-- TODO: Format dates using Moment. -->
         </small>
       </div>
     </div>

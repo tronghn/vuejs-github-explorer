@@ -1,10 +1,10 @@
 <template>
   <div>
-    <input type="radio" id="open" value="open" v-model="state">
+    <input type="radio" id="open" :value="state" :checked="state === 'open'" @click="changeState('open')">
     <label class="select-radio" for="open">
       <span class="fa fa-exclamation-circle"></span> Open
     </label>
-    <input type="radio" id="closed" value="closed" v-model="state">
+    <input type="radio" id="closed" :value="state" :checked="state === 'closed'" @click="changeState('closed')">
     <label class="select-radio" for="closed">
       <span class="fa fa-check"></span> Closed
     </label>
@@ -12,11 +12,15 @@
 </template>
 
 <script>
+import { setSwitchState } from '../vuex/actions'
+
 export default {
-  props: {
-    state: {
-      type: String,
-      required: true
+  vuex: {
+    actions: {
+      changeState: setSwitchState
+    },
+    getters: {
+      state: state => state.switchState
     }
   }
 }

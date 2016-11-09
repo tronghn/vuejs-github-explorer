@@ -1,8 +1,12 @@
 <template>
-  <div class="alert alert-danger animated" role="alert" v-show="errorState" 
-    transition="slide" transition-mode="out-in">
-    <p><strong>Oh no!</strong> An error occured: {{ errorMsg }}</p>
-  </div>
+  <transition name="custom-classes-transition"
+    enter-active-class="animated slideInDown"
+    leave-active-class="animated slideOutUp"
+    mode="out-in">
+    <div class="alert alert-danger" role="alert" v-show="errorState">
+      <p><strong>Oh no!</strong> An error occured: {{ errorMsg }}</p>
+    </div>
+  </transition>
 </template>
 
 <script>

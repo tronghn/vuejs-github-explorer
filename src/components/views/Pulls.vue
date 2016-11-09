@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-center">
-      <state-switch :state.sync="state"></state-switch> <!-- TODO: sync will be removed in Vue 2.0 -->
+      <state-switch></state-switch> <!-- TODO: sync will be removed in Vue 2.0 -->
       <page-nav-btns 
       :next-page-available="nextPageAvailable" 
       :prev-page-available="prevPageAvailable"
@@ -14,8 +14,12 @@
         Showing {{ dataCount }} Pull Requests (page {{ pageNumber }})
       </div>
       <div class="panel-body">
-        <pull v-show="pulls.length > 0" v-for="pull in pulls" :pull="pull" 
-            class="animated" transition="fade" transition-mode="out-in"></pull>
+        <transition-group name="custom-classes-transition"
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+          mode="out-in">
+          <pull v-show="pulls.length > 0" v-for="pull in pulls" :key="pull.number" :pull="pull"></pull>
+        </transition-group>
         <div v-show="pulls.length <= 0" class="text-center" >
           <div v-show="state === 'open'">
             <h3>There aren't any open pull requests</h3>
@@ -45,11 +49,6 @@ export default {
     StateSwitch
   },
   mixins: [RepoProps, Pagination],
-  data () {
-    return {
-      state: 'open'
-    }
-  },
   computed: {
     pulls () {
       return this.data
@@ -60,7 +59,7 @@ export default {
       if (!this.nextPageAvailable) {
         Api.getPulls(this.username, this.repo, pageNumber, this.state)
         .then((response) => {
-          this.data = response.json()
+          this.data = response.body
         })
         .catch((error) => {
           this.setError(error)
@@ -71,7 +70,7 @@ export default {
     getNextData (pageNumber) {
       Api.getPulls(this.username, this.repo, (pageNumber + 1), this.state)
       .then((response) => {
-        this.dataNext = response.json()
+        this.dataNext = response.body
         this.nextPageAvailable = (this.dataNext.length > 0)
       })
       .catch((error) => {
@@ -81,7 +80,7 @@ export default {
     getPrevData (pageNumber) {
       Api.getPulls(this.username, this.repo, (pageNumber - 1), this.state)
       .then((response) => {
-        this.dataPrev = response.json()
+        this.dataPrev = response.body
         this.prevPageAvailable = (this.dataPrev.length > 0)
       })
       .catch((error) => {
@@ -97,6 +96,9 @@ export default {
   vuex: {
     actions: {
       setError
+    },
+    getters: {
+      state: state => state.switchState
     }
   }
 }

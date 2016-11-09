@@ -38,3 +38,7 @@ export const setRepo = ({dispatch}, fullRepoName) => {
     setError({dispatch}, 'Invalid input.')
   }
 }
+
+export const setSwitchState = ({dispatch}, state) => {
+  dispatch('SET_SWITCH_STATE', state)
+}

@@ -2,19 +2,19 @@
   <div>
     <div class="table-row cell-row">
       <div class="clearfix">
-        <a v-if="authorUrl" href="{{ authorUrl }}"><img class="pull-left cell-avatar" :src="authorAvatar" width="40"></a>
+        <a v-if="authorUrl" :href="authorUrl"><img class="pull-left cell-avatar" :src="authorAvatar" width="40"></a>
         <img class="pull-left cell-avatar" v-else :src="authorAvatar" width="40">
         <div class="content-heading">
-          <a class="cell-title" href="{{ pullUrl }}">
+          <a class="cell-title" :href="pullUrl">
             <strong>{{ pullMessage }}</strong>
           </a>
         </div>
         <small>
           #{{ pullNumber }} opened
-          <span title="{{ pullDate | moment 'D. MMM. YYYY, HH:mm ZZ'}}"> {{ pullDate | moment "from" }}</span>
+          <span> {{ pullDate }}</span> <!-- TODO: Format dates using moment -->
           by
           <strong class="cell-author">
-            <a v-if="authorUrl" href="{{ authorUrl }}">{{ authorUsername }}</a>
+            <a v-if="authorUrl" :href="authorUrl">{{ authorUsername }}</a>
             <span v-else>{{ authorUsername }}</span>
           </strong>
         </small>

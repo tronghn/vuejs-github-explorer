@@ -10,50 +10,21 @@ import Contributors from './components/views/Contributors.vue'
 import Commits from './components/views/Commits.vue'
 import Pulls from './components/views/Pulls.vue'
 
-Vue.config.debug = true
-
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VueMoment)
 
-Vue.transition('fade', {
-  enterClass: 'fadeIn',
-  leaveClass: 'fadeOut'
-})
-
-Vue.transition('slide', {
-  enterClass: 'slideInDown',
-  leaveClass: 'slideOutUp'
-})
-
 const router = new VueRouter({
-  linkActiveClass: 'active',
-  transitionOnLoad: true
+  routes: [
+    { path: '/files', name: 'files', component: Files },
+    { path: '/contributors', name: 'contributors', component: Contributors },
+    { path: '/commits', name: 'commits', component: Commits },
+    { path: '/pulls', name: 'pulls', component: Pulls },
+    { path: '/', redirect: '/files' },
+    { path: '*', redirect: '/' }
+  ]
 })
-
-router.map({
-  '/files': {
-    name: 'files',
-    component: Files
-  },
-  '/contributors': {
-    name: 'contributors',
-    component: Contributors
-  },
-  '/commits': {
-    name: 'commits',
-    component: Commits
-  },
-  '/pulls': {
-    name: 'pulls',
-    component: Pulls
-  }
-})
-
-router.redirect({
-  '/': '/files',
-
-  '*': '/'
-})
-
-router.start(App, '#app')
+new Vue({ // eslint-disable-line no-new
+  router: router,
+  ...App
+}).$mount('#app')

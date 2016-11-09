@@ -13,25 +13,26 @@
     </div>
     <div class="panel-body">
       <table class="table">
-        <tbody>
-          <tr v-for="file in sortedFiles" class="animated" transition="fade" transition-mode="out-in">
-            <td>
-              <div class="file" v-if="file.type === 'file'">
-                <span class="fa fa-file-o"></span>
-                {{ file.name }}
-              </div>
-              <div class="directory" v-if="file.type === 'dir'">
-                <span class="fa fa-folder-o"></span>
-                <a @click="changePath(file.path)">{{ file.name }}</a>
-              </div>
-            </td>
-            <td class="text-right">
-              <a href="{{ file.download_url }}" download v-if="file.type === 'file'">
-                <span class="fa fa-cloud-download"></span>
-              </a>
-            </td>
-          </tr>
-        </tbody>
+
+          <tbody>
+            <tr v-for="file in sortedFiles" :key="file.sha">
+              <td>
+                <div class="file" v-if="file.type === 'file'">
+                  <span class="fa fa-file-o"></span>
+                  {{ file.name }}
+                </div>
+                <div class="directory" v-if="file.type === 'dir'">
+                  <span class="fa fa-folder-o"></span>
+                  <a @click="changePath(file.path)">{{ file.name }}</a>
+                </div>
+              </td>
+              <td class="text-right">
+                <a :href="file.download_url" download v-if="file.type === 'file'">
+                  <span class="fa fa-cloud-download"></span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
       </table>
     </div>
   </div>
@@ -72,7 +73,7 @@ export default {
     getData () {
       Api.getFiles(this.username, this.repo, this.path)
         .then((response) => {
-          this.data = response.json()
+          this.data = response.body
         })
         .catch((error) => {
           this.setError(error)
@@ -92,6 +93,7 @@ export default {
     actions: {
       setError
     }
-  }
+  },
+  name: 'files'
 }
 </script>

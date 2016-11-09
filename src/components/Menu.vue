@@ -1,14 +1,19 @@
 <template>
   <div class="nav-vertical">
     <button type="button" class="toggle-nav btn btn-primary" 
-      v-bind:class="{ 'toggle-nav-collapsed' : toggle }" @click="toggle = !toggle">
-      <span v-bind:class="{'fa fa-chevron-right': toggle, 'fa fa-chevron-left': !toggle}"></span>
+      :class="{ 'toggle-nav-collapsed' : toggle }" @click="toggle = !toggle">
+      <span :class="{'fa fa-chevron-right': toggle, 'fa fa-chevron-left': !toggle}"></span>
     </button>
-    <ul class="nav nav-pills nav-stacked" v-bind:class="{'nav-pills-collapsed': toggle}">
-      <li v-link-active v-for="page in pages">
-        <a v-link="{ path: page.path }" title="{{ page.text }}">
-          <span class="nav-icon fa {{ page.icon }}"></span>
-          <p v-show="!toggle" class="nav-text animated" transition="fade" transition-mode="out-in">{{ page.text }}</p>
+    <ul class="nav nav-pills nav-stacked" :class="{'nav-pills-collapsed': toggle}">
+      <router-link tag="li" :to="page.path" v-for="page in pages">
+        <a :title="page.text">
+          <span :class="'nav-icon fa ' + page.icon"></span>
+          <transition name="custom-classes-transition"
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut"
+            mode="out-in">
+            <p v-show="!toggle" class="nav-text">{{ page.text }}</p>
+          </transition>
         </a>
       </li>
     </ul>
@@ -83,7 +88,8 @@ $c1: #042f40;
   width: 40px;
 }
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+.nav-pills>li.router-link-active>a, .nav-pills>li.router-link-active>a:focus, .nav-pills>li.router-link-active>a:hover {
+  color: #fff;
   background-color: $c1;
   border-radius: 0;
 }

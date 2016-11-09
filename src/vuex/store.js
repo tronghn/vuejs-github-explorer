@@ -7,7 +7,8 @@ const state = {
   username: '',
   repo: '',
   errorState: false,
-  errorMsg: ''
+  errorMsg: '',
+  switchState: 'open'
 }
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
   },
   SET_ERROR_VISIBLE (state, visible) {
     state.errorState = visible
+  },
+  SET_SWITCH_STATE (state, switchState) {
+    state.switchState = switchState
   }
 }
 
