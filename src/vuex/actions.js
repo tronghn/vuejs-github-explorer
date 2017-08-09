@@ -11,7 +11,7 @@ export const setError = ({dispatch}, error) => {
   if (typeof errorMsg === 'string') {
     errorMsg = error
   } else {
-    errorMsg = JSON.parse(errorMsg.body).message
+    errorMsg = errorMsg.body.message
   }
   dispatch('SET_ERROR', errorMsg)
   showError({dispatch})
